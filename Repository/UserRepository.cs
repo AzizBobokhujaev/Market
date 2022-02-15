@@ -4,6 +4,7 @@ using Contracts.Repositories;
 using Entities;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace Repository
@@ -27,6 +28,24 @@ namespace Repository
         public async Task<IEnumerable<User>> GetListAsync()
         {
             return await _context.Users.ToListAsync();
+        }
+
+        public async Task<int> AddToRole(User user, string role)
+        {
+            var roleId = 0;
+            if (role == "Контентщик")
+            {
+                roleId = 2;
+            }
+
+            var userRoles = new IdentityUserRole<int>
+                {
+                    UserId = user.Id,
+                    RoleId = roleId
+                }
+                ;
+            var result = await _context.UserRoles.AddAsync(userRoles); 
+            return await _context.SaveChangesAsync();
         }
     }
 }

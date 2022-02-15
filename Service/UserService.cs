@@ -40,7 +40,8 @@ namespace Service
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
-                //await _userManager.AddToRoleAsync(user, "Контентщик");
+                //await _userManager.AddToRoleAsync(user, "Контентщик");// Don't work
+                await _userRepository.AddToRole(user, "Контентщик");
                 return new Response {Status = (int)HttpStatusCode.OK, Message = "Пользователь успешно добавлена!"};
             }
 
