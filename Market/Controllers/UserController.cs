@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Contracts.Services;
+using Entities.DataTransferObjects;
+using Entities.DataTransferObjects.Users;
 using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,10 +18,16 @@ namespace Market.Controllers
             _service = service;
         }
 
-        [HttpGet]
-        public async Task<User> GetUsers()
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create([FromBody] CreateUserDto model)
         {
-            return await _service.GetUsers();
+            return Ok(await _service.CreateUser(model));
+        }
+        
+        [HttpGet("GetList")]
+        public async Task<IActionResult> GetList()
+        {
+            return Ok(await _service.GetUserList());
         }
         
     }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj": {}
+    "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj": {}
   },
   "projects": {
-    "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj": {
+    "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\payrav\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\market\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\payrav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -38,7 +38,15 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.14, )"
             }
@@ -58,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

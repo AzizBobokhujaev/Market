@@ -9,7 +9,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Logger" />
+      <PackageReference Include="NLog.Extensions.Logging" Version="5.0.0-rc2" />
     </ItemGroup>
 
 </Project>
