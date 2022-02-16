@@ -38,6 +38,7 @@ namespace Market
             services.ConfigureServices();   
             services.ConfigureIdentity();   
             services.ConfigureCors();
+            services.ConfigureAuthentication(Configuration);////
             services.ConfigureLoggerService();////
             services.ConfigureRouting();
             services.AddRouting(x => x.LowercaseUrls = true);//// 

@@ -45,7 +45,23 @@ namespace Repository
                 }
                 ;
             var result = await _context.UserRoles.AddAsync(userRoles); 
-            return await _context.SaveChangesAsync();
+            return   await _context.SaveChangesAsync();
+        }
+
+        public async Task<User> GetUserById(int id)
+        {
+            return await _context.Users.FirstOrDefaultAsync(user => user.Id == id);
+            
+        }
+
+        public async Task<User> GetUserByEmail(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(user => user.Email.Equals(email));
+        }
+
+        public async Task SaveAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

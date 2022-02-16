@@ -1,16 +1,19 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
+using System.Text;
 using Contracts;
 using Contracts.Repositories;
 using Contracts.Services;
 using Entities;
 using Entities.Models;
 using LoggerService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using Repository;
 using Service;
 
@@ -39,8 +42,8 @@ namespace Market.Extensions
         //
         public static void ConfigureIdentity(this IServiceCollection services)
         {
-            services.AddIdentityCore<User>().AddEntityFrameworkStores<DataContext>();
-            //services.AddIdentityCore<Role>().AddEntityFrameworkStores<DataContext>();
+            services.AddIdentity<User, IdentityRole<int>>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
+            //services.AddIdentityCore<IdentityRole<int>>().AddEntityFrameworkStores<DataContext>();
         }
     
          public static void ConfigureRouting(this IServiceCollection services) =>
@@ -49,7 +52,27 @@ namespace Market.Extensions
          public static void ConfigureLoggerService(this IServiceCollection services) =>
              services.AddScoped<ILoggerManager, LoggerManager>();
 
-         
+         public static void ConfigureAuthentication(this IServiceCollection services,IConfiguration configuration)
+         {
+             services.AddAuthentication(options =>
+             {
+                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                 options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+             }).AddJwtBearer(options =>
+             {
+                 options.SaveToken = true;
+                 options.RequireHttpsMetadata = false;
+                 options.TokenValidationParameters = new TokenValidationParameters()
+                 {
+                     ValidateIssuer = true,
+                     ValidateAudience = true,
+                     ValidAudience = configuration["JWT:ValidAudience"],
+                     ValidIssuer = configuration["JWT:ValidIssuer"],
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]))
+                 };
+             });
+         }
          
     }
 }

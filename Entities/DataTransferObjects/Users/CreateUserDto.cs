@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace Entities.DataTransferObjects.Users
 {
@@ -14,7 +15,7 @@ namespace Entities.DataTransferObjects.Users
         [StringLength(60,MinimumLength = 6)]
         public string Password { get; set; }
         [Required]
-        [StringLength(60,MinimumLength = 6)]
+        [Compare("Password")]
         public string ConfirmPassword { get; set; }
     }
 }

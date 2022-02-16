@@ -12,5 +12,11 @@ namespace Contracts.Repositories
         Task<IEnumerable<User>> GetListAsync();
 
         public Task<int> AddToRole(User user, string role);
+
+        public Task<User> GetUserById(int id);
+
+        Task SaveAsync();
+        
+        
     }
 }

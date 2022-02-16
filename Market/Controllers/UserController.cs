@@ -18,6 +18,12 @@ namespace Market.Controllers
             _service = service;
         }
 
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto model)
+        {
+            return Ok(await _service.Login(model));
+        }
+
         [HttpPost("Create")]
         public async Task<IActionResult> Create([FromBody] CreateUserDto model)
         {
@@ -29,6 +35,19 @@ namespace Market.Controllers
         {
             return Ok(await _service.GetUserList());
         }
+
+        [HttpDelete("DeleteById")]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            return Ok(await _service.DeleteUserById(id));
+        }
+
+        [HttpDelete("DeleteByEmail")]
+        public async Task<IActionResult> DeleteByEmail(string email)
+        {
+            return Ok(await _service.DeleteUserByEmail(email));
+        }
+        
         
     }
 }

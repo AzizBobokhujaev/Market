@@ -1,4 +1,6 @@
-﻿namespace Entities.DataTransferObjects
+﻿using System.IdentityModel.Tokens.Jwt;
+
+namespace Entities.DataTransferObjects
 {
     public class Response
     {
