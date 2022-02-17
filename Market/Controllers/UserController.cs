@@ -41,13 +41,5 @@ namespace Market.Controllers
         {
             return Ok(await _service.DeleteUserById(id));
         }
-
-        [HttpDelete("DeleteByEmail")]
-        public async Task<IActionResult> DeleteByEmail(string email)
-        {
-            return Ok(await _service.DeleteUserByEmail(email));
-        }
-        
-        
     }
 }

@@ -34,10 +34,15 @@ namespace Service
 
         public async Task<Response> CreateUser(CreateUserDto model)
         {
+            var resultUser = await _userRepository.GetByEmailAsync(model.Email);
+            if (resultUser != null)
+                return new Response
+                    {Status = (int) HttpStatusCode.BadRequest, Message = "Пользователь с таким логином уже существует"};
+            
+            
             if (model.Password != model.ConfirmPassword)
-            {
                 return new Response {Status = (int)HttpStatusCode.BadRequest, Message = "Пароли не совпадают!"};
-            }
+            
 
             var user = new User()
             {
@@ -54,7 +59,7 @@ namespace Service
             }
 
             var errorMessage = result.Errors.FirstOrDefault();
-            return new Response {Status = (int)HttpStatusCode.BadRequest, Message = errorMessage?.Description};
+            return new Response {Status = (int)HttpStatusCode.BadRequest, Message = "Ошибка при создании пользователья"};
         }
 
         public async Task<GenericResponse<IEnumerable<User>>> GetUserList()
@@ -75,19 +80,6 @@ namespace Service
             {
                 return new Response{Status = (int)HttpStatusCode.NotFound,Message = "Пользователь не найден"};
             }
-            _userRepository.Delete(user);
-            await _userRepository.SaveAsync();
-            return new Response {Status = (int) HttpStatusCode.OK, Message = "Пользователь успешно удален"};
-        }
-
-        public async Task<Response> DeleteUserByEmail(string email)
-        {
-            var user = await _userRepository.GetByEmailAsync(email);
-            if (user==null)
-            {
-                return new Response {Status = (int) HttpStatusCode.NotFound, Message = "Пользователь не найден"};
-            }
-
             _userRepository.Delete(user);
             await _userRepository.SaveAsync();
             return new Response {Status = (int) HttpStatusCode.OK, Message = "Пользователь успешно удален"};
