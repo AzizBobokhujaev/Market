@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entities.Migrations
 {
-    public partial class init : Migration
+    public partial class AddModels : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,27 @@ namespace Entities.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ParentCategoryId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_Categories_ParentCategoryId",
+                        column: x => x.ParentCategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -154,20 +175,109 @@ namespace Entities.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "AspNetRoles",
-                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "83ac86e0-7a72-4537-b144-61c9a2191489", "Администратор", "АДМИНИСТРАТОР" });
+            migrationBuilder.CreateTable(
+                name: "Products",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Size = table.Column<double>(type: "float", nullable: false),
+                    Seasons = table.Column<int>(type: "int", nullable: false),
+                    Completeness = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Types = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Width = table.Column<int>(type: "int", nullable: false),
+                    Length = table.Column<int>(type: "int", nullable: false),
+                    Thickness = table.Column<int>(type: "int", nullable: false),
+                    BeltMaterial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsNew = table.Column<bool>(type: "bit", nullable: false),
+                    IsSale = table.Column<bool>(type: "bit", nullable: false),
+                    IsTop = table.Column<bool>(type: "bit", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Products_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    PhoneNumber = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    ProductId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProductFiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductId = table.Column<int>(type: "int", nullable: false),
+                    FileSize = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsMain = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductFiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ProductFiles_Products_ProductId",
+                        column: x => x.ProductId,
+                        principalTable: "Products",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "67faa5ec-51f0-40e3-a55b-168e1be75f49", "Контентщик", "КОНТЕНТЩИК" });
+                values: new object[] { 1, "a6da16c4-1e68-4f81-971c-94ea98a59c3c", "Администратор", "АДМИНИСТРАТОР" });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[] { 2, "e567b628-9fea-442c-940f-12f2b7993a5e", "Контентщик", "КОНТЕНТЩИК" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "851befc5-7d91-4cb4-bdb7-7e38165adb3a", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEIkozC1IVFZvFIckHqoo22EwwvbToUSQ9m2DLkp8F6HUH+e1VUPoBv2iEKHytIGZWA==", null, false, "", false, "Admin" });
+                values: new object[] { 1, 0, "f860c172-9457-4ac6-a9b4-67ab3cfc707a", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEIxsgWMteDfez0/Pn6rO++bMtp8y+qtyPe/uJXSm4iTZl9V+KO/fD7lQ7QsEV7iq3A==", null, false, "", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -207,11 +317,43 @@ namespace Entities.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Email",
+                table: "AspNetUsers",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_ParentCategoryId",
+                table: "Categories",
+                column: "ParentCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_ProductId",
+                table: "Orders",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProductFiles_ProductId",
+                table: "ProductFiles",
+                column: "ProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Products_UserId",
+                table: "Products",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -232,10 +374,22 @@ namespace Entities.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Orders");
+
+            migrationBuilder.DropTable(
+                name: "ProductFiles");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
+                name: "Products");
+
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
         }
     }
 }

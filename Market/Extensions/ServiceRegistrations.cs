@@ -35,7 +35,9 @@ namespace Market.Extensions
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ILoggerManager,LoggerManager>();
         }
 
