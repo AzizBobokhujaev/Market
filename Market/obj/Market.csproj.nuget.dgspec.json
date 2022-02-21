@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\payrav\\RiderProjects\\Market\\Market\\Market.csproj": {}
+    "C:\\Users\\admin\\Desktop\\market\\Market\\Market.csproj": {}
   },
   "projects": {
-    "C:\\Users\\payrav\\RiderProjects\\Market\\Contracts\\Contracts.csproj": {
+    "C:\\Users\\admin\\Desktop\\market\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\payrav\\RiderProjects\\Market\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\market\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Contracts\\Contracts.csproj",
-        "packagesPath": "C:\\Users\\payrav\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Contracts\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\market\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\market\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\payrav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -26,8 +26,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj"
+              "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj"
               }
             }
           }
@@ -41,6 +41,12 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
+          "dependencies": {
+            "NLog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[5.0.0-rc2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -56,21 +62,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj": {
+    "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\payrav\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Entities\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\market\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\market\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\payrav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -94,7 +100,15 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
             "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.14, )"
             }
@@ -114,21 +128,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\payrav\\RiderProjects\\Market\\Market\\Market.csproj": {
+    "C:\\Users\\admin\\Desktop\\market\\LoggerService\\LoggerService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\payrav\\RiderProjects\\Market\\Market\\Market.csproj",
-        "projectName": "Market",
-        "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Market\\Market.csproj",
-        "packagesPath": "C:\\Users\\payrav\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Market\\obj\\",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\market\\LoggerService\\LoggerService.csproj",
+        "projectName": "LoggerService",
+        "projectPath": "C:\\Users\\admin\\Desktop\\market\\LoggerService\\LoggerService.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\market\\LoggerService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\payrav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -140,8 +154,67 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\payrav\\RiderProjects\\Market\\Service\\Service.csproj": {
-                "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Service\\Service.csproj"
+              "C:\\Users\\admin\\Desktop\\market\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\market\\Contracts\\Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\admin\\Desktop\\market\\Market\\Market.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\market\\Market\\Market.csproj",
+        "projectName": "Market",
+        "projectPath": "C:\\Users\\admin\\Desktop\\market\\Market\\Market.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\market\\Market\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "C:\\Users\\admin\\Desktop\\market\\LoggerService\\LoggerService.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\market\\LoggerService\\LoggerService.csproj"
+              },
+              "C:\\Users\\admin\\Desktop\\market\\Service\\Service.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\market\\Service\\Service.csproj"
               }
             }
           }
@@ -156,9 +229,45 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[5.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "target": "Package",
+              "version": "[5.0.14, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[5.0.2, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[5.0.10, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -183,21 +292,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\payrav\\RiderProjects\\Market\\Repository\\Repository.csproj": {
+    "C:\\Users\\admin\\Desktop\\market\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\payrav\\RiderProjects\\Market\\Repository\\Repository.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\market\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\payrav\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Repository\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\market\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\market\\Repository\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\payrav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -209,8 +318,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\payrav\\RiderProjects\\Market\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Contracts\\Contracts.csproj"
+              "C:\\Users\\admin\\Desktop\\market\\Contracts\\Contracts.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\market\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -239,21 +348,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\payrav\\RiderProjects\\Market\\Service\\Service.csproj": {
+    "C:\\Users\\admin\\Desktop\\market\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\payrav\\RiderProjects\\Market\\Service\\Service.csproj",
+        "projectUniqueName": "C:\\Users\\admin\\Desktop\\market\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Service\\Service.csproj",
-        "packagesPath": "C:\\Users\\payrav\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Service\\obj\\",
+        "projectPath": "C:\\Users\\admin\\Desktop\\market\\Service\\Service.csproj",
+        "packagesPath": "C:\\Users\\admin\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\admin\\Desktop\\market\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\payrav\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
@@ -265,8 +374,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\payrav\\RiderProjects\\Market\\Repository\\Repository.csproj": {
-                "projectPath": "C:\\Users\\payrav\\RiderProjects\\Market\\Repository\\Repository.csproj"
+              "C:\\Users\\admin\\Desktop\\market\\Repository\\Repository.csproj": {
+                "projectPath": "C:\\Users\\admin\\Desktop\\market\\Repository\\Repository.csproj"
               }
             }
           }
@@ -295,7 +404,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\5.0.404\\RuntimeIdentifierGraph.json"
         }
       }
     }
