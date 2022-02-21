@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220218125902_AddModels")]
-    partial class AddModels
+    [Migration("20220221055306_edited")]
+    partial class edited
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -86,14 +86,14 @@ namespace Entities.Migrations
                     b.Property<string>("Color")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Completeness")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -149,17 +149,14 @@ namespace Entities.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Entities.Models.ProductFiles", b =>
+            modelBuilder.Entity("Entities.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FileSize")
+                    b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsMain")
@@ -250,13 +247,13 @@ namespace Entities.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f860c172-9457-4ac6-a9b4-67ab3cfc707a",
+                            ConcurrencyStamp = "c0d6824f-a213-42a7-8f3e-1aa004e152f9",
                             Email = "Admin@mail.ru",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIxsgWMteDfez0/Pn6rO++bMtp8y+qtyPe/uJXSm4iTZl9V+KO/fD7lQ7QsEV7iq3A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHWL3f7zY9+ICVqmeG9YE13T6fphDh7Sg34J6iGVgWFrxMUggW1vD3U2Qp855OM62Q==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -296,14 +293,14 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "a6da16c4-1e68-4f81-971c-94ea98a59c3c",
+                            ConcurrencyStamp = "bb992a0d-6a3e-45ac-9e30-4182f84738bd",
                             Name = "Администратор",
                             NormalizedName = "АДМИНИСТРАТОР"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "e567b628-9fea-442c-940f-12f2b7993a5e",
+                            ConcurrencyStamp = "2137119d-62cd-4a33-9b73-eb6ed13e3478",
                             Name = "Контентщик",
                             NormalizedName = "КОНТЕНТЩИК"
                         });
@@ -456,7 +453,7 @@ namespace Entities.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Entities.Models.ProductFiles", b =>
+            modelBuilder.Entity("Entities.Models.ProductImage", b =>
                 {
                     b.HasOne("Entities.Models.Product", "Product")
                         .WithMany("ProductFiles")

@@ -36,3 +36,4 @@ C:\Users\admin\Desktop\market\Service\obj\Debug\net5.0\Service.csproj.CopyComple
 C:\Users\admin\Desktop\market\Service\obj\Debug\net5.0\Service.dll
 C:\Users\admin\Desktop\market\Service\obj\Debug\net5.0\ref\Service.dll
 C:\Users\admin\Desktop\market\Service\obj\Debug\net5.0\Service.pdb
+C:\Users\admin\Desktop\market\Service\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll

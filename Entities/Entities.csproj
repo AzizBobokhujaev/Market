@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <Folder Include="Common" />
-      <Folder Include="DataTransferObjects\Products" />
       <Folder Include="Helpers" />
     </ItemGroup>
 
@@ -14,6 +13,12 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14" />
       <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.14" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.14" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Http.Features, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60">
+        <HintPath>..\..\..\..\..\Program Files (x86)\dotnet\shared\Microsoft.AspNetCore.App\5.0.13\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+      </Reference>
     </ItemGroup>
 
 </Project>

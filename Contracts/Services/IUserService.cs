@@ -14,5 +14,7 @@ namespace Contracts.Services
         public Task<Response> DeleteUserById(int id);
 
         Task<GenericResponse<UserDto>> Login(LoginDto model);
+        Task<GenericResponse<User>> GetUserById(int id);
+        
     }
 }

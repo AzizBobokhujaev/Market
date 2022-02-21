@@ -1,8 +1,13 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Contracts.Repositories;
 using Contracts.Services;
 using Entities.DataTransferObjects;
+using Entities.DataTransferObjects.Products;
+using Entities.Enums;
 using Entities.Models;
 
 namespace Service
@@ -10,10 +15,11 @@ namespace Service
     public class ProductService:IProductService
     {
         private readonly IProductRepository _repository;
-
-        public ProductService(IProductRepository repository)
+        private readonly IFileService _fileService;
+        public ProductService(IProductRepository repository, IFileService fileService)
         {
             _repository = repository;
+            _fileService = fileService;
         }
 
         
@@ -38,5 +44,40 @@ namespace Service
                 Message = $"User by id = {id} not found"
             };
         }
+
+        #region CreateAsync
+        /*public async Task<Response> CreateAsync(CreateProductsRequest request)
+        {
+            var productImages = new List<ProductImage>()
+            {
+                new()
+                {
+                    ImagePath = await _fileService.AddFileAsync(request.MainImage, FileTypes.Image, nameof(Product)),
+                    IsMain = true
+                }
+            };
+            if (request.Images != null)
+            {
+                productImages.AddRange(request.Images.Select(x=>new ProductImage
+                {
+                    ImagePath =  _fileService.AddFileAsync(x,FileTypes.Image,nameof(Product)).Result,
+                    IsMain = false
+                }));
+            }
+
+            var product = new Product
+            {
+                Name = request.Name,
+                Description = request.Description,
+                Price = request.Price,
+                Color = request.Color,
+                CreatedAt = DateTime.Now
+
+            };
+            await _repository.CreateAsync(product);
+            await _repository.SaveAsync();
+            return new Response{Status = (int)HttpStatusCode.OK,Message = "Product created successfully"};
+        }*/
+        #endregion
     }
 }

@@ -8,7 +8,8 @@
     ".NETCoreApp,Version=v5.0": {
       "Service/1.0.0": {
         "dependencies": {
-          "Repository": "1.0.0"
+          "Repository": "1.0.0",
+          "Microsoft.AspNetCore.Http.Features": "5.0.0.0"
         },
         "runtime": {
           "Service.dll": {}
@@ -1143,6 +1144,14 @@
         "runtime": {
           "Repository.dll": {}
         }
+      },
+      "Microsoft.AspNetCore.Http.Features/5.0.0.0": {
+        "runtime": {
+          "Microsoft.AspNetCore.Http.Features.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.1321.57202"
+          }
+        }
       }
     }
   },
@@ -1871,6 +1880,11 @@
     },
     "Repository/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.AspNetCore.Http.Features/5.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

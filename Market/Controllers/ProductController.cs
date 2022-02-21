@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using Contracts.Services;
+using Entities.DataTransferObjects.Products;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Controllers
@@ -20,5 +21,11 @@ namespace Market.Controllers
         {
             return Ok(await _service.GetProductById(id));
         }
+
+        /*[HttpPost("Create")]
+        public async Task<IActionResult> Create(CreateProductsRequest model)
+        {
+            return Ok(await _service.CreateAsync(model));
+        }*/
     }
 }

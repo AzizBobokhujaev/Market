@@ -6,5 +6,7 @@ namespace Contracts.Repositories
     public interface IProductRepository:IRepositoryBase<Product>
     {
         public Task<Product> GetProductById(int id);
+
+        //Task SaveAsync();
     }
 }

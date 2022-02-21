@@ -22,3 +22,5 @@ C:\Users\admin\Desktop\market\Entities\obj\Debug\net5.0\Entities.csproj.CoreComp
 C:\Users\admin\Desktop\market\Entities\obj\Debug\net5.0\Entities.dll
 C:\Users\admin\Desktop\market\Entities\obj\Debug\net5.0\ref\Entities.dll
 C:\Users\admin\Desktop\market\Entities\obj\Debug\net5.0\Entities.pdb
+C:\Users\admin\Desktop\market\Entities\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\admin\Desktop\market\Entities\obj\Debug\net5.0\Entities.csproj.CopyComplete

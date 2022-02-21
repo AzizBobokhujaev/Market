@@ -28,3 +28,4 @@ C:\Users\admin\Desktop\market\Contracts\obj\Debug\net5.0\Contracts.csproj.CopyCo
 C:\Users\admin\Desktop\market\Contracts\obj\Debug\net5.0\Contracts.dll
 C:\Users\admin\Desktop\market\Contracts\obj\Debug\net5.0\ref\Contracts.dll
 C:\Users\admin\Desktop\market\Contracts\obj\Debug\net5.0\Contracts.pdb
+C:\Users\admin\Desktop\market\Contracts\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll

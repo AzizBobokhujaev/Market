@@ -129,6 +129,18 @@ namespace Service
                 Message = "Успешный вход!"
             };
         }
+
+        public async Task<GenericResponse<User>> GetUserById(int id)
+        {
+            var user = await _userRepository.GetUserById(id);
+            if (user != null)
+            {
+                return new() {Payload = user, Status = (int) HttpStatusCode.OK, Message = $"User by id : {id}"};
+            }
+
+            return new()
+                {Payload = null, Status = (int) HttpStatusCode.NotFound, Message = $"User by id : {id} not found"};
+        }
     }
 }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entities.Migrations
 {
-    public partial class AddModels : Migration
+    public partial class edited : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -184,9 +184,9 @@ namespace Entities.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Size = table.Column<double>(type: "float", nullable: false),
                     Seasons = table.Column<int>(type: "int", nullable: false),
-                    Completeness = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Types = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -249,8 +249,7 @@ namespace Entities.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
-                    FileSize = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsMain = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
@@ -267,17 +266,17 @@ namespace Entities.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "a6da16c4-1e68-4f81-971c-94ea98a59c3c", "Администратор", "АДМИНИСТРАТОР" });
+                values: new object[] { 1, "bb992a0d-6a3e-45ac-9e30-4182f84738bd", "Администратор", "АДМИНИСТРАТОР" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "e567b628-9fea-442c-940f-12f2b7993a5e", "Контентщик", "КОНТЕНТЩИК" });
+                values: new object[] { 2, "2137119d-62cd-4a33-9b73-eb6ed13e3478", "Контентщик", "КОНТЕНТЩИК" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "f860c172-9457-4ac6-a9b4-67ab3cfc707a", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEIxsgWMteDfez0/Pn6rO++bMtp8y+qtyPe/uJXSm4iTZl9V+KO/fD7lQ7QsEV7iq3A==", null, false, "", false, "Admin" });
+                values: new object[] { 1, 0, "c0d6824f-a213-42a7-8f3e-1aa004e152f9", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEHWL3f7zY9+ICVqmeG9YE13T6fphDh7Sg34J6iGVgWFrxMUggW1vD3U2Qp855OM62Q==", null, false, "", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

@@ -8,16 +8,16 @@ using Microsoft.VisualBasic;
 
 namespace Entities.Models
 {
-    public class Product
+    public class  Product
     {
         [Key]
         public int Id { get; set; }// номер продукта
         public string Name { get; set; } // название продкута
         public decimal Price { get; set; } // цена продукта
         public string Color { get; set; } // цвет продукта
+        public string Description { get; set; }
         public double Size { get; set; } // размеры продукта
         public Seasons Seasons { get; set; } 
-        public string Completeness { get; set; }//полнота
         public string Material { get; set; } 
         public string Image { get; set; }
         public string Types { get; set; } // тип
@@ -33,14 +33,15 @@ namespace Entities.Models
         public bool IsTop { get; set; } // в топе4
         public int CategoryId { get; set; }
         public int UserId { get; set; }
-        
+       // public virtual IEnumerable<ProductImage> ProductImages { get; set; }
+
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
         
-        public virtual ICollection<ProductFiles> ProductFiles { get; set; }
+        public virtual ICollection<ProductImage> ProductFiles { get; set; }
         
         public virtual ICollection<Order> Orders { get; set; }
 

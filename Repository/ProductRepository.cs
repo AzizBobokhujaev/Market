@@ -19,5 +19,8 @@ namespace Repository
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
         }
+
+        public async Task SaveAsync() =>
+            await _context.SaveChangesAsync();  
     }
 }

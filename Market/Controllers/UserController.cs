@@ -36,6 +36,12 @@ namespace Market.Controllers
             return Ok(await _service.GetUserList());
         }
 
+        [HttpGet("GetById")]
+        public async Task<IActionResult> GetById(int id)
+        {
+            return Ok(await _service.GetUserById(id));
+        }
+
         [HttpDelete("DeleteById")]
         public async Task<IActionResult> DeleteById(int id)
         {
