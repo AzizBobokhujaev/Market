@@ -16,15 +16,12 @@ namespace Entities.Models
         public decimal Price { get; set; } // цена продукта
         public string Color { get; set; } // цвет продукта
         public string Description { get; set; }
-        public double Size { get; set; } // размеры продукта
+        public string Size { get; set; } // размеры продукта
         public Seasons Seasons { get; set; } 
         public string Material { get; set; } 
         public string Image { get; set; }
-        public string Types { get; set; } // тип
-        public int Width { get; set; } // ширина
-        public int Length { get; set; } //длина 
-        public int Thickness { get; set; }//толщина
-        public string BeltMaterial { get; set; }//материал ремня
+        public int? Width { get; set; } // ширина
+        public int? Length { get; set; } //длина 
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime DeletedAt { get; set; }
@@ -33,7 +30,6 @@ namespace Entities.Models
         public bool IsTop { get; set; } // в топе4
         public int CategoryId { get; set; }
         public int UserId { get; set; }
-       // public virtual IEnumerable<ProductImage> ProductImages { get; set; }
 
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
@@ -41,7 +37,7 @@ namespace Entities.Models
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
         
-        public virtual ICollection<ProductImage> ProductFiles { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
         
         public virtual ICollection<Order> Orders { get; set; }
 

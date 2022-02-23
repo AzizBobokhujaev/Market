@@ -9,6 +9,7 @@ namespace Contracts.Services
     public interface IProductService
     {
         public Task<GenericResponse<Product>> GetProductById(int id);
-        //public Task<Response> CreateAsync(CreateProductsRequest request);
+        Task<IEnumerable<Product>> GetAllProducts();
+        Task<int> CreateAsync(CreateProductRequest model, int categoryId);
     }
 }

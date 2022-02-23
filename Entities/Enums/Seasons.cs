@@ -5,12 +5,12 @@ namespace Entities.Enums
     public enum Seasons
     {
         [Description("Winter")]
-        Winter,
+        Winter=1,
         [Description("Spring")]
-        Spring,
+        Spring=2,
         [Description("Summer")]
-        Summer,
+        Summer=3,
         [Description("Autumn")]
-        Autumn
+        Autumn=4
     }
 }

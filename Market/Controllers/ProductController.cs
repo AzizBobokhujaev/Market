@@ -22,10 +22,16 @@ namespace Market.Controllers
             return Ok(await _service.GetProductById(id));
         }
 
-        /*[HttpPost("Create")]
-        public async Task<IActionResult> Create(CreateProductsRequest model)
+        [HttpGet("GetAll")]
+        public async Task<IActionResult> GetAllProducts()
         {
-            return Ok(await _service.CreateAsync(model));
-        }*/
+            return Ok(await _service.GetAllProducts());
+        }
+        
+        [HttpPost("Create")]
+        public async Task<IActionResult> Create(CreateProductRequest model,int categoryId)
+        {
+            return Ok(await _service.CreateAsync(model,categoryId));
+        }
     }
 }

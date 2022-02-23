@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entities.Migrations
 {
-    public partial class edited : Migration
+    public partial class NewMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,14 +56,14 @@ namespace Entities.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ParentId = table.Column<int>(type: "int", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ParentCategoryId = table.Column<int>(type: "int", nullable: true)
+                    CategoryId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Categories_Categories_ParentCategoryId",
-                        column: x => x.ParentCategoryId,
+                        name: "FK_Categories_Categories_CategoryId",
+                        column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -185,15 +185,12 @@ namespace Entities.Migrations
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Size = table.Column<double>(type: "float", nullable: false),
+                    Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Seasons = table.Column<int>(type: "int", nullable: false),
                     Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Types = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Width = table.Column<int>(type: "int", nullable: false),
-                    Length = table.Column<int>(type: "int", nullable: false),
-                    Thickness = table.Column<int>(type: "int", nullable: false),
-                    BeltMaterial = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Width = table.Column<int>(type: "int", nullable: true),
+                    Length = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -266,17 +263,17 @@ namespace Entities.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "bb992a0d-6a3e-45ac-9e30-4182f84738bd", "Администратор", "АДМИНИСТРАТОР" });
+                values: new object[] { 1, "a8b52623-fb00-4811-a446-23917ae3c4e9", "Администратор", "АДМИНИСТРАТОР" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "2137119d-62cd-4a33-9b73-eb6ed13e3478", "Контентщик", "КОНТЕНТЩИК" });
+                values: new object[] { 2, "d3b35c87-0863-4f8c-a383-6bbab4e636c7", "Контентщик", "КОНТЕНТЩИК" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "c0d6824f-a213-42a7-8f3e-1aa004e152f9", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEHWL3f7zY9+ICVqmeG9YE13T6fphDh7Sg34J6iGVgWFrxMUggW1vD3U2Qp855OM62Q==", null, false, "", false, "Admin" });
+                values: new object[] { 1, 0, "59340301-9d1f-4a2f-b284-98de6c6dd7bf", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEGVmo1EWSMvq3tFXP7R6/BX9hWM1/gGYcylEMgYrS9N/GvYLTfFVZUw0AW44kcivZw==", null, false, "", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -330,9 +327,9 @@ namespace Entities.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_ParentCategoryId",
+                name: "IX_Categories_CategoryId",
                 table: "Categories",
-                column: "ParentCategoryId");
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_ProductId",

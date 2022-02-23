@@ -14,19 +14,21 @@ namespace Service
 {
     public class ProductService:IProductService
     {
-        private readonly IProductRepository _repository;
+        private readonly ICategoryRepository _categoryRepository;
+        private readonly IProductRepository _productRepository;
         private readonly IFileService _fileService;
-        public ProductService(IProductRepository repository, IFileService fileService)
+        public ProductService(IProductRepository productRepository, IFileService fileService, ICategoryRepository categoryRepository)
         {
-            _repository = repository;
+            _productRepository = productRepository;
             _fileService = fileService;
+            _categoryRepository = categoryRepository;
         }
 
         
 
         public async Task<GenericResponse<Product>> GetProductById(int id)
         {
-            var prod = await _repository.GetProductById(id);
+            var prod = await _productRepository.GetProductById(id);
             if (prod !=null)
             {
                 return new()
@@ -45,39 +47,40 @@ namespace Service
             };
         }
 
-        #region CreateAsync
-        /*public async Task<Response> CreateAsync(CreateProductsRequest request)
+        public async Task<IEnumerable<Product>> GetAllProducts()
         {
-            var productImages = new List<ProductImage>()
-            {
-                new()
-                {
-                    ImagePath = await _fileService.AddFileAsync(request.MainImage, FileTypes.Image, nameof(Product)),
-                    IsMain = true
-                }
-            };
-            if (request.Images != null)
-            {
-                productImages.AddRange(request.Images.Select(x=>new ProductImage
-                {
-                    ImagePath =  _fileService.AddFileAsync(x,FileTypes.Image,nameof(Product)).Result,
-                    IsMain = false
-                }));
-            }
+            return await _productRepository.GetAllProducts();
+        }
+
+        public async Task<int> CreateAsync(CreateProductRequest model, int categoryId)
+        {
+            var category = await _categoryRepository.GetCategoriesById(categoryId);
+            if (category==null)
+                return 0;
 
             var product = new Product
             {
-                Name = request.Name,
-                Description = request.Description,
-                Price = request.Price,
-                Color = request.Color,
+                Name = model.Name,
+                Price = model.Price,
+                Color = model.Color,
+                Description = model.Description,
+                Size = model.Size,
+                Seasons = model.Seasons,
+                Material = model.Material,
+                Width = model.Width,
+                Length = model.Length,
+                IsNew = true,
+                IsSale = false,
+                IsTop = false,
+                Image = "dcdvddcdx",
+                UserId = 1,
+                CategoryId = categoryId,
                 CreatedAt = DateTime.Now
-
             };
-            await _repository.CreateAsync(product);
-            await _repository.SaveAsync();
-            return new Response{Status = (int)HttpStatusCode.OK,Message = "Product created successfully"};
-        }*/
-        #endregion
+            await _productRepository.CreateAsync(product);
+            await _productRepository.SaveAsync();
+            return product.Id;
+
+        }
     }
 }

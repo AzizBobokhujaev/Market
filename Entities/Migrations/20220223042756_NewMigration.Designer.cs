@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220221055306_edited")]
-    partial class edited
+    [Migration("20220223042756_NewMigration")]
+    partial class NewMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,18 +28,18 @@ namespace Entities.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentCategoryId")
-                        .HasColumnType("int");
 
                     b.Property<int?>("ParentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ParentCategoryId");
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Categories");
                 });
@@ -77,9 +77,6 @@ namespace Entities.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("BeltMaterial")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
@@ -107,7 +104,7 @@ namespace Entities.Migrations
                     b.Property<bool>("IsTop")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Length")
+                    b.Property<int?>("Length")
                         .HasColumnType("int");
 
                     b.Property<string>("Material")
@@ -122,13 +119,7 @@ namespace Entities.Migrations
                     b.Property<int>("Seasons")
                         .HasColumnType("int");
 
-                    b.Property<double>("Size")
-                        .HasColumnType("float");
-
-                    b.Property<int>("Thickness")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Types")
+                    b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
@@ -137,7 +128,7 @@ namespace Entities.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Width")
+                    b.Property<int?>("Width")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -247,13 +238,13 @@ namespace Entities.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c0d6824f-a213-42a7-8f3e-1aa004e152f9",
+                            ConcurrencyStamp = "59340301-9d1f-4a2f-b284-98de6c6dd7bf",
                             Email = "Admin@mail.ru",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHWL3f7zY9+ICVqmeG9YE13T6fphDh7Sg34J6iGVgWFrxMUggW1vD3U2Qp855OM62Q==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGVmo1EWSMvq3tFXP7R6/BX9hWM1/gGYcylEMgYrS9N/GvYLTfFVZUw0AW44kcivZw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -293,14 +284,14 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "bb992a0d-6a3e-45ac-9e30-4182f84738bd",
+                            ConcurrencyStamp = "a8b52623-fb00-4811-a446-23917ae3c4e9",
                             Name = "Администратор",
                             NormalizedName = "АДМИНИСТРАТОР"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "2137119d-62cd-4a33-9b73-eb6ed13e3478",
+                            ConcurrencyStamp = "d3b35c87-0863-4f8c-a383-6bbab4e636c7",
                             Name = "Контентщик",
                             NormalizedName = "КОНТЕНТЩИК"
                         });
@@ -416,11 +407,9 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.Category", b =>
                 {
-                    b.HasOne("Entities.Models.Category", "ParentCategory")
-                        .WithMany("SubCategories")
-                        .HasForeignKey("ParentCategoryId");
-
-                    b.Navigation("ParentCategory");
+                    b.HasOne("Entities.Models.Category", null)
+                        .WithMany("SubCategory")
+                        .HasForeignKey("CategoryId");
                 });
 
             modelBuilder.Entity("Entities.Models.Order", b =>
@@ -456,7 +445,7 @@ namespace Entities.Migrations
             modelBuilder.Entity("Entities.Models.ProductImage", b =>
                 {
                     b.HasOne("Entities.Models.Product", "Product")
-                        .WithMany("ProductFiles")
+                        .WithMany("ProductImages")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -519,14 +508,14 @@ namespace Entities.Migrations
                 {
                     b.Navigation("Products");
 
-                    b.Navigation("SubCategories");
+                    b.Navigation("SubCategory");
                 });
 
             modelBuilder.Entity("Entities.Models.Product", b =>
                 {
                     b.Navigation("Orders");
 
-                    b.Navigation("ProductFiles");
+                    b.Navigation("ProductImages");
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Contracts.Repositories;
 using Entities;
 using Entities.Models;
@@ -18,6 +19,11 @@ namespace Repository
         public async Task<Product> GetProductById(int id)
         {
             return await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+        }
+
+        public async Task<IEnumerable<Product>> GetAllProducts()
+        {
+            return await _context.Products.ToListAsync();
         }
 
         public async Task SaveAsync() =>

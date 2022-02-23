@@ -100,6 +100,7 @@ namespace Service
             if (!await _userManager.CheckPasswordAsync(user,model.Password)) return new GenericResponse<UserDto> {Status = (int) HttpStatusCode.Unauthorized, Message = "Неправильный пароль "};
 
             var userRoles = await _userManager.GetRolesAsync(user);
+            
 
             var authClaims = new List<Claim>
             {
@@ -107,6 +108,7 @@ namespace Service
                 new Claim("UserId", user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
+            
             foreach (var userRole in userRoles)
             {
                 authClaims.Add(new Claim(ClaimTypes.Role,userRole));
@@ -124,7 +126,7 @@ namespace Service
 
             return new ()
             {
-                Payload = new UserDto(new JwtSecurityTokenHandler().WriteToken(token)),
+                Payload = new UserDto(user,userRoles.ToList(),new JwtSecurityTokenHandler().WriteToken(token)),
                 Status = (int) HttpStatusCode.OK,
                 Message = "Успешный вход!"
             };

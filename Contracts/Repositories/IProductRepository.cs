@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Entities.DataTransferObjects.Products;
 using Entities.Models;
 
 namespace Contracts.Repositories
@@ -7,6 +9,8 @@ namespace Contracts.Repositories
     {
         public Task<Product> GetProductById(int id);
 
-        //Task SaveAsync();
+        Task SaveAsync();
+        Task<IEnumerable<Product>> GetAllProducts();
+
     }
 }
