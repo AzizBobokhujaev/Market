@@ -14,6 +14,7 @@ using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using NLog.LayoutRenderers.Wrappers;
 using JwtRegisteredClaimNames = Microsoft.IdentityModel.JsonWebTokens.JwtRegisteredClaimNames;
 
 namespace Service
@@ -54,19 +55,34 @@ namespace Service
             if (result.Succeeded)
             {
                 //await _userManager.AddToRoleAsync(user, "Контентщик");// Don't work
-                await _userRepository.AddToRole(user, "Контентщик");
-                return new Response {Status = (int)HttpStatusCode.OK, Message = "Пользователь успешно добавлена!"};
+                await _userRepository.AddToRole(user, model.RoleId);
+                return new Response {Status = (int)HttpStatusCode.Created, Message = "Пользователь успешно добавлена!"};
             }
-
-            var errorMessage = result.Errors.FirstOrDefault();
             return new Response {Status = (int)HttpStatusCode.BadRequest, Message = "Ошибка при создании пользователья"};
         }
 
-        public async Task<GenericResponse<IEnumerable<User>>> GetUserList()
+        public async Task<Response> UpdateUser(UpdateUserDto model, int id)
+        {
+            var user = await _userRepository.GetUserById(id);
+            if (user==null)
+                return new Response {Status = (int) HttpStatusCode.NotFound, Message = $"User by id {id} not found"};
+            if (model.RoleId > 2)
+                return new Response {Status = (int) HttpStatusCode.NotFound, Message = "No such role exists"};
+            user.UserName = model.UserName;
+            user.NormalizedUserName = model.UserName.ToUpper();
+            await _userRepository.DeleteRole(user);
+            await _userRepository.AddToRole(user, model.RoleId);
+            _userRepository.Update(user);
+            await _userRepository.SaveAsync();
+            return new Response {Status = (int) HttpStatusCode.OK, Message = $"User by id {id} successfully updated"};
+        }
+
+        public async Task<GenericResponse<IEnumerable<UserDto>>> GetAllUsers()
         {
             return new()
             {
-                Payload = await _userRepository.GetListAsync(),
+                
+                Payload = await _userRepository.GetAllUsers(),
                 Message = "Ok",
                 Status = (int) HttpStatusCode.OK
             };
@@ -85,7 +101,7 @@ namespace Service
             return new Response {Status = (int) HttpStatusCode.OK, Message = "Пользователь успешно удален"};
         }
 
-        public async Task<GenericResponse<UserDto>> Login(LoginDto model)
+        public async Task<GenericResponse<AuthenticationResponse>> Login(LoginDto model)
         {
             var user = await _userRepository.GetByEmailAsync(model.Email);
             if (user==null)
@@ -97,7 +113,7 @@ namespace Service
                 };
             }
 
-            if (!await _userManager.CheckPasswordAsync(user,model.Password)) return new GenericResponse<UserDto> {Status = (int) HttpStatusCode.Unauthorized, Message = "Неправильный пароль "};
+            if (!await _userManager.CheckPasswordAsync(user,model.Password)) return new GenericResponse<AuthenticationResponse> {Status = (int) HttpStatusCode.Unauthorized, Message = "Неправильный пароль "};
 
             var userRoles = await _userManager.GetRolesAsync(user);
             
@@ -126,7 +142,7 @@ namespace Service
 
             return new ()
             {
-                Payload = new UserDto(user,userRoles.ToList(),new JwtSecurityTokenHandler().WriteToken(token)),
+                Payload = new AuthenticationResponse(user,userRoles.ToList(),new JwtSecurityTokenHandler().WriteToken(token)),
                 Status = (int) HttpStatusCode.OK,
                 Message = "Успешный вход!"
             };
@@ -142,6 +158,14 @@ namespace Service
 
             return new()
                 {Payload = null, Status = (int) HttpStatusCode.NotFound, Message = $"User by id : {id} not found"};
+        }
+
+        public async Task<IdentityRole<int>> GetRoleByUserId(int userId)
+        {
+            var user = await _userRepository.GetUserById(userId);
+            if (user == null)
+                return null;
+            return await _userRepository.GetRoleByUserId(userId);
         }
     }
 }

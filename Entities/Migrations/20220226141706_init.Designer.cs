@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220223042756_NewMigration")]
-    partial class NewMigration
+    [Migration("20220226141706_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,9 +80,6 @@ namespace Entities.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -92,16 +89,10 @@ namespace Entities.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("IsNew")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsSale")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsTop")
                         .HasColumnType("bit");
 
                     b.Property<int?>("Length")
@@ -147,6 +138,9 @@ namespace Entities.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
@@ -160,7 +154,7 @@ namespace Entities.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ProductFiles");
+                    b.ToTable("ProductImage");
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>
@@ -238,13 +232,13 @@ namespace Entities.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "59340301-9d1f-4a2f-b284-98de6c6dd7bf",
+                            ConcurrencyStamp = "7a112835-3016-4299-8f64-927f7ab9e74d",
                             Email = "Admin@mail.ru",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGVmo1EWSMvq3tFXP7R6/BX9hWM1/gGYcylEMgYrS9N/GvYLTfFVZUw0AW44kcivZw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENAJYiyztUk6PV74T4zAzEr9NsGOoJYyTsD6pulFYGG7Yt48YKgKuBwj1c6F0ImD6w==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -284,14 +278,14 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "a8b52623-fb00-4811-a446-23917ae3c4e9",
+                            ConcurrencyStamp = "1b49ee64-63d4-4e22-b20d-b4522f29f0ea",
                             Name = "Администратор",
                             NormalizedName = "АДМИНИСТРАТОР"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "d3b35c87-0863-4f8c-a383-6bbab4e636c7",
+                            ConcurrencyStamp = "2b2c6641-3fab-4be7-9fce-26159b209037",
                             Name = "Контентщик",
                             NormalizedName = "КОНТЕНТЩИК"
                         });

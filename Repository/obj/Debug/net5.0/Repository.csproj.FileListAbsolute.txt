@@ -32,4 +32,3 @@ C:\Users\admin\Desktop\market\Repository\obj\Debug\net5.0\Repository.csproj.Copy
 C:\Users\admin\Desktop\market\Repository\obj\Debug\net5.0\Repository.dll
 C:\Users\admin\Desktop\market\Repository\obj\Debug\net5.0\ref\Repository.dll
 C:\Users\admin\Desktop\market\Repository\obj\Debug\net5.0\Repository.pdb
-C:\Users\admin\Desktop\market\Repository\bin\Debug\net5.0\Microsoft.AspNetCore.Http.Features.dll

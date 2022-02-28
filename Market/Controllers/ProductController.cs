@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Contracts.Services;
 using Entities.DataTransferObjects.Products;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Market.Controllers
@@ -19,7 +20,13 @@ namespace Market.Controllers
         [HttpGet("GetById")]
         public async Task<IActionResult> GetProductById(int id)
         {
-            return Ok(await _service.GetProductById(id));
+            var result = await _service.GetProductById(id);
+            return result.Status switch
+            {
+                200 => Ok(result),
+                404 => NotFound(result),
+                _ => BadRequest(result)
+            };
         }
 
         [HttpGet("GetAll")]
@@ -28,10 +35,34 @@ namespace Market.Controllers
             return Ok(await _service.GetAllProducts());
         }
         
-        [HttpPost("Create")]
+        [HttpPut("Create")]
         public async Task<IActionResult> Create(CreateProductRequest model,int categoryId)
         {
             return Ok(await _service.CreateAsync(model,categoryId));
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> Update(UpdateProductRequest model, int productId)
+        {
+            var result = await _service.Update(model, productId);
+            return result.Status switch
+            {
+                200 => Ok(result),
+                404 => NotFound(result),
+                _ => BadRequest(result)
+            };
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete(int productId)
+        {
+            var result =await _service.Delete(productId);
+            return result.Status switch
+            {
+                200 => Ok(result),
+                404 => NotFound(result),
+                _ => BadRequest(result)
+            };
         }
     }
 }

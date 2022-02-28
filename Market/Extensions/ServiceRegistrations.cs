@@ -23,8 +23,7 @@ namespace Market.Extensions
     {
         public static void ConfigureCors(this IServiceCollection services) =>
             services.AddCors(options => options.AddPolicy("Policy", builder =>
-                builder.WithOrigins("https://localhost:3000")
-                    .AllowCredentials()
+                builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod())); 
         public static void ConfigureDataContext(this IServiceCollection services, IConfiguration configuration) =>
@@ -35,7 +34,6 @@ namespace Market.Extensions
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IFileService, FileService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IUserRepository, UserRepository>();
@@ -44,7 +42,10 @@ namespace Market.Extensions
             services.AddScoped<ILoggerManager,LoggerManager>();
         }
 
-        //
+        /// <summary>
+        /// Configure Identity service 
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             services.AddIdentity<User, IdentityRole<int>>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();

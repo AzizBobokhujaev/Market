@@ -14,12 +14,10 @@ namespace Entities.Models
         public int Id { get; set; }// номер продукта
         public string Name { get; set; } // название продкута
         public decimal Price { get; set; } // цена продукта
-        public string Color { get; set; } // цвет продукта
         public string Description { get; set; }
         public string Size { get; set; } // размеры продукта
         public Seasons Seasons { get; set; } 
         public string Material { get; set; } 
-        public string Image { get; set; }
         public int? Width { get; set; } // ширина
         public int? Length { get; set; } //длина 
         public DateTime CreatedAt { get; set; }
@@ -27,7 +25,6 @@ namespace Entities.Models
         public DateTime DeletedAt { get; set; }
         public bool IsNew { get; set; } // новинки
         public bool IsSale { get; set; } // скидки
-        public bool IsTop { get; set; } // в топе4
         public int CategoryId { get; set; }
         public int UserId { get; set; }
 

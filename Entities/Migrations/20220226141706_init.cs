@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Entities.Migrations
 {
-    public partial class NewMigration : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -183,12 +183,10 @@ namespace Entities.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Seasons = table.Column<int>(type: "int", nullable: false),
                     Material = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Width = table.Column<int>(type: "int", nullable: true),
                     Length = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -196,7 +194,6 @@ namespace Entities.Migrations
                     DeletedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsNew = table.Column<bool>(type: "bit", nullable: false),
                     IsSale = table.Column<bool>(type: "bit", nullable: false),
-                    IsTop = table.Column<bool>(type: "bit", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -240,20 +237,21 @@ namespace Entities.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductFiles",
+                name: "ProductImage",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProductId = table.Column<int>(type: "int", nullable: false),
+                    Color = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsMain = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProductFiles", x => x.Id);
+                    table.PrimaryKey("PK_ProductImage", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProductFiles_Products_ProductId",
+                        name: "FK_ProductImage_Products_ProductId",
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
@@ -263,17 +261,17 @@ namespace Entities.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 1, "a8b52623-fb00-4811-a446-23917ae3c4e9", "Администратор", "АДМИНИСТРАТОР" });
+                values: new object[] { 1, "1b49ee64-63d4-4e22-b20d-b4522f29f0ea", "Администратор", "АДМИНИСТРАТОР" });
 
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { 2, "d3b35c87-0863-4f8c-a383-6bbab4e636c7", "Контентщик", "КОНТЕНТЩИК" });
+                values: new object[] { 2, "2b2c6641-3fab-4be7-9fce-26159b209037", "Контентщик", "КОНТЕНТЩИК" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "59340301-9d1f-4a2f-b284-98de6c6dd7bf", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEGVmo1EWSMvq3tFXP7R6/BX9hWM1/gGYcylEMgYrS9N/GvYLTfFVZUw0AW44kcivZw==", null, false, "", false, "Admin" });
+                values: new object[] { 1, 0, "7a112835-3016-4299-8f64-927f7ab9e74d", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAENAJYiyztUk6PV74T4zAzEr9NsGOoJYyTsD6pulFYGG7Yt48YKgKuBwj1c6F0ImD6w==", null, false, "", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -337,8 +335,8 @@ namespace Entities.Migrations
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProductFiles_ProductId",
-                table: "ProductFiles",
+                name: "IX_ProductImage_ProductId",
+                table: "ProductImage",
                 column: "ProductId");
 
             migrationBuilder.CreateIndex(
@@ -373,7 +371,7 @@ namespace Entities.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "ProductFiles");
+                name: "ProductImage");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

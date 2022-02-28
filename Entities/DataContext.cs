@@ -15,7 +15,7 @@ namespace Entities
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<ProductImage> ProductFiles { get; set; }
+        public DbSet<ProductImage> ProductImage { get; set; }
         public DbSet<Order> Orders { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)
