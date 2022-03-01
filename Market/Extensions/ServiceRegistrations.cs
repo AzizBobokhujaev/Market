@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql.Replication;
 using Repository;
 using Service;
 
@@ -50,6 +51,16 @@ namespace Market.Extensions
         {
             services.AddIdentity<User, IdentityRole<int>>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
             //services.AddIdentityCore<IdentityRole<int>>().AddEntityFrameworkStores<DataContext>();
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredLength = 6;
+                opt.User.RequireUniqueEmail = true;
+
+            });
         }
     
          public static void ConfigureRouting(this IServiceCollection services) =>
@@ -79,6 +90,8 @@ namespace Market.Extensions
                  };
              });
          }
+
          
+
     }
 }

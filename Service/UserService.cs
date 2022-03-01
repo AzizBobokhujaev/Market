@@ -56,7 +56,7 @@ namespace Service
             {
                 //await _userManager.AddToRoleAsync(user, "Контентщик");// Don't work
                 await _userRepository.AddToRole(user, model.RoleId);
-                return new Response {Status = (int)HttpStatusCode.Created, Message = "Пользователь успешно добавлена!"};
+                return new Response {Status = (int)HttpStatusCode.OK, Message = "Пользователь успешно добавлена!"};
             }
             return new Response {Status = (int)HttpStatusCode.BadRequest, Message = "Ошибка при создании пользователья"};
         }

@@ -35,8 +35,6 @@ namespace Entities.Models
         public virtual User User { get; set; }
         
         public virtual ICollection<ProductImage> ProductImages { get; set; }
-        
-        public virtual ICollection<Order> Orders { get; set; }
 
 
 

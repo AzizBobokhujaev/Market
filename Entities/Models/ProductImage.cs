@@ -11,7 +11,6 @@ namespace Entities.Models
         public int ProductId { get; set; }
         public string Color { get; set; }
         public string ImagePath { get; set; }
-        public bool IsMain { get; set; }
         public virtual Product Product { get; set; }
     }
 }
