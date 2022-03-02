@@ -35,13 +35,13 @@ namespace Market.Controllers
             return Ok(await _service.GetAllProducts());
         }
         
-        [HttpPut("Create")]
+        [HttpPost("Create")]
         public async Task<IActionResult> Create(CreateProductRequest model,int categoryId)
         {
             return Ok(await _service.CreateAsync(model,categoryId));
         }
 
-        [HttpPost("Update")]
+        [HttpPut("Update")]
         public async Task<IActionResult> Update(UpdateProductRequest model, int productId)
         {
             var result = await _service.Update(model, productId);

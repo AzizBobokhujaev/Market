@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Contracts.Repositories;
 using Entities;
@@ -21,7 +22,7 @@ namespace Repository
             return await _context.Categories.ToListAsync();
         }
 
-        public async Task<Category> GetCategoriesById(int id)
+        public async Task<Category> GetCategoryById(int id)
         {
             return await _context.Categories.FirstOrDefaultAsync(c => c.Id == id);
         }
@@ -29,5 +30,6 @@ namespace Repository
         public async Task SaveAsync() =>
             await _context.SaveChangesAsync();
 
+        
     }
 }

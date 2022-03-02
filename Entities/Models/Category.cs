@@ -8,10 +8,6 @@ namespace Entities.Models
         public int Id { get; set; }
         public int? ParentId { get; set; }
         public string Name { get; set; }
-        public string NameEn { get; set; }
-        public string NameRu { get; set; }
-        public string NameTj { get; set; }
-        public string NameCh { get; set; }
         
         
         

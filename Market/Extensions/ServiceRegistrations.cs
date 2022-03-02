@@ -37,6 +37,8 @@ namespace Market.Extensions
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductImageRepository, ProductImageRepository>();
+            services.AddScoped<IProductImageService, ProductImageService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();

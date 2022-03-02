@@ -26,7 +26,7 @@ namespace Service
 
         public async Task<GenericResponse<Category>> GetCategoryById(int id)
         {
-            var category = await _repository.GetCategoriesById(id);
+            var category = await _repository.GetCategoryById(id);
             if (category != null)
             {
                 return new()
@@ -60,7 +60,7 @@ namespace Service
 
         public async Task<Response> UpdateAsync(int id, UpdateCategoryRequest request)
         {
-            var category = await _repository.GetCategoriesById(id);
+            var category = await _repository.GetCategoryById(id);
             if (category == null)
             {
                 return new Response
@@ -75,7 +75,7 @@ namespace Service
 
         public async Task<Response> DeleteAsync(int id)
         {
-            var category = await _repository.GetCategoriesById(id);
+            var category = await _repository.GetCategoryById(id);
             if (category == null)
                 return new Response
                     {Status = (int) HttpStatusCode.NotFound, Message = $"Category by id : {id} not found"};

@@ -40,32 +40,98 @@ namespace Entities.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Categories");
-                });
 
-            modelBuilder.Entity("Entities.Models.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("Orders");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Обувь",
+                            ParentId = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Кожа",
+                            ParentId = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Подошвы",
+                            ParentId = 0
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Ремни",
+                            ParentId = 0
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Мужской",
+                            ParentId = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Военный",
+                            ParentId = 1
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Подростковый",
+                            ParentId = 1
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Классик",
+                            ParentId = 5
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Охотничий",
+                            ParentId = 5
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Рабочий",
+                            ParentId = 5
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Сапоги",
+                            ParentId = 5
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Спортивный",
+                            ParentId = 5
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Мокасины",
+                            ParentId = 5
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Берцы",
+                            ParentId = 6
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Военный",
+                            ParentId = 4
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Product", b =>
@@ -141,9 +207,6 @@ namespace Entities.Migrations
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -230,13 +293,13 @@ namespace Entities.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7a112835-3016-4299-8f64-927f7ab9e74d",
+                            ConcurrencyStamp = "39d4e566-0891-480b-b4a4-265919c323ab",
                             Email = "Admin@mail.ru",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAENAJYiyztUk6PV74T4zAzEr9NsGOoJYyTsD6pulFYGG7Yt48YKgKuBwj1c6F0ImD6w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJj+1Q592d4mGXSRnUpbLegVnFil0nMuL0SyVoX5CHZ1uOEVOurtJrzcqV+HVwQ/aQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -276,14 +339,14 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "1b49ee64-63d4-4e22-b20d-b4522f29f0ea",
+                            ConcurrencyStamp = "1dd5175c-70cd-4450-ad42-6e1fde828fba",
                             Name = "Администратор",
                             NormalizedName = "АДМИНИСТРАТОР"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "2b2c6641-3fab-4be7-9fce-26159b209037",
+                            ConcurrencyStamp = "3f648602-7fa2-44d9-a992-99b2ac32ef0a",
                             Name = "Контентщик",
                             NormalizedName = "КОНТЕНТЩИК"
                         });
@@ -404,17 +467,6 @@ namespace Entities.Migrations
                         .HasForeignKey("CategoryId");
                 });
 
-            modelBuilder.Entity("Entities.Models.Order", b =>
-                {
-                    b.HasOne("Entities.Models.Product", "Product")
-                        .WithMany("Orders")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("Entities.Models.Product", b =>
                 {
                     b.HasOne("Entities.Models.Category", "Category")
@@ -505,8 +557,6 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.Product", b =>
                 {
-                    b.Navigation("Orders");
-
                     b.Navigation("ProductImages");
                 });
 

@@ -56,7 +56,7 @@ namespace Service
 
         public async Task<int> CreateAsync(CreateProductRequest model, int categoryId)
         {
-            var category = await _categoryRepository.GetCategoriesById(categoryId);
+            var category = await _categoryRepository.GetCategoryById(categoryId);
             if (category==null)
                 return 0; 
 
