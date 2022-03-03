@@ -54,7 +54,7 @@ namespace Service
             return await _productRepository.GetAllProducts();
         }
 
-        public async Task<int> CreateAsync(CreateProductRequest model, int categoryId)
+        public async Task<int> CreateAsync(CreateProductRequest model, int categoryId,string currentUserId)
         {
             var category = await _categoryRepository.GetCategoryById(categoryId);
             if (category==null)
@@ -72,7 +72,7 @@ namespace Service
                 Length = model.Length,
                 IsNew = true,
                 IsSale = false,
-                UserId = 1,
+                UserId = int.Parse(currentUserId),
                 CategoryId = categoryId,
                 CreatedAt = DateTime.Now
                 

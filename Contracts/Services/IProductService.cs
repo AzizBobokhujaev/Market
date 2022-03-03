@@ -10,7 +10,7 @@ namespace Contracts.Services
     {
         public Task<GenericResponse<Product>> GetProductById(int id);
         Task<IEnumerable<Product>> GetAllProducts();
-        Task<int> CreateAsync(CreateProductRequest model, int categoryId);
+        Task<int> CreateAsync(CreateProductRequest model, int categoryId,string currentUserId);
         Task<Response> Update(UpdateProductRequest model, int productId);
         Task<Response> Delete(int productId);
     }

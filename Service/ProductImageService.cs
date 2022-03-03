@@ -32,13 +32,12 @@ namespace Service
             var files = new List<ProductImage>();
             if (model.Images == null)
                 return new Response {Status = (int) HttpStatusCode.BadRequest, Message = "Failed"};
-            var path = "";
             foreach (var file in model.Images)
             {
-                path = Path.GetFullPath($"wwwroot/Images/Product/{category.Name}/{model.ProductId}/{model.Color}");
+                var path = Path.GetFullPath($"wwwroot/Images/Product/{category.Name}/{model.ProductId}/{model.Color}");
                 if (!Directory.Exists(path))
                 {
-                    Directory.CreateDirectory(path);
+                    Directory.CreateDirectory(path);    
                 }
 
                 var fileExtension = Path.GetExtension(file.FileName);
@@ -49,13 +48,14 @@ namespace Service
                 {
                     await file.CopyToAsync(fileStream);
                 }
+                files.Add(new ProductImage
+                {
+                    Color = model.Color,
+                    ImagePath = finalFileName,
+                    ProductId = model.ProductId,
+                });
             }
-            files.Add(new ProductImage
-            {
-                Color = model.Color,
-                ImagePath = path,
-                ProductId = model.ProductId,
-            });
+            
             await _imageRepository.CreateFile(files);
             return new Response {Status = (int) HttpStatusCode.OK, Message = "Files added successfully"};
 

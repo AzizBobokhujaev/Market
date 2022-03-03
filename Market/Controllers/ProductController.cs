@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Contracts.Services;
 using Entities.DataTransferObjects.Products;
@@ -38,7 +39,8 @@ namespace Market.Controllers
         [HttpPost("Create")]
         public async Task<IActionResult> Create(CreateProductRequest model,int categoryId)
         {
-            return Ok(await _service.CreateAsync(model,categoryId));
+            var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            return Ok(await _service.CreateAsync(model,categoryId,currentUserId));
         }
 
         [HttpPut("Update")]
