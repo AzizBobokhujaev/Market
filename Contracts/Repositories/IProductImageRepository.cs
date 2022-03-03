@@ -8,6 +8,7 @@ namespace Contracts.Repositories
     {
         Task<List<ProductImage>> GetAll();
         Task CreateFile(List<ProductImage> files);
-        
+
+        Task<IEnumerable<ProductImage>> GetProdImgByProdId(int productId);
     }
 }

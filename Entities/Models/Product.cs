@@ -34,7 +34,7 @@ namespace Entities.Models
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
         
-        public virtual ICollection<ProductImage> ProductImages { get; set; }
+        public virtual IEnumerable<ProductImage> ProductImages { get; set; }
 
 
 

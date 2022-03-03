@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Contracts.Repositories;
 using Entities;
@@ -22,6 +23,11 @@ namespace Repository
         {
             await Context.AddRangeAsync(files);
             await Context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<ProductImage>> GetProdImgByProdId(int productId)
+        {
+            return await Context.ProductImage.Where(pi => pi.ProductId == productId).ToListAsync();
         }
     }
 }

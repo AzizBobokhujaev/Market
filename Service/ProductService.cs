@@ -49,9 +49,14 @@ namespace Service
             };
         }
 
-        public async Task<IEnumerable<Product>> GetAllProducts()
+        public async Task<GenericResponse<IEnumerable<Product>>> GetAllProducts()
         {
-            return await _productRepository.GetAllProducts();
+            return new()
+            {
+                Payload = await _productRepository.GetAllProducts(),
+                Status = (int) HttpStatusCode.OK,
+                Message = "AllProducts"
+            };
         }
 
         public async Task<int> CreateAsync(CreateProductRequest model, int categoryId,string currentUserId)

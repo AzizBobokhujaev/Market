@@ -25,5 +25,11 @@ namespace Market.Controllers
         {
             return Ok(await _service.AddImageForProduct(model));
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProductImagesBuProductId(int productId)
+        {
+            return Ok(await _service.GetProductImageByProductId(productId));
+        }
     }
 }

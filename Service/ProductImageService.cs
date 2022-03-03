@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Contracts.Repositories;
@@ -59,6 +60,26 @@ namespace Service
             await _imageRepository.CreateFile(files);
             return new Response {Status = (int) HttpStatusCode.OK, Message = "Files added successfully"};
 
+        }
+
+        public async Task<GenericResponse<IEnumerable<ProductImage>>> GetProductImageByProductId(int productId)
+        {
+            var images= await _imageRepository.GetProdImgByProdId(productId);
+            if (images.Count() == 0)
+            {
+                return new ()
+                {
+                    Payload = null, Status = (int) HttpStatusCode.NotFound,
+                    Message = $"ProductImages by productId {productId} not found"
+                };
+            }
+
+            return new()
+            {
+                Payload = images,
+                Status = (int) HttpStatusCode.OK,
+                Message = "Ok"
+            };
         }
     }
 }

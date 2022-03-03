@@ -11,5 +11,6 @@ namespace Contracts.Repositories
         Task<Category> GetCategoryById(int id);
 
         Task SaveAsync();
+        Task<IEnumerable<Category>> GetAllWithSubs();
     }
 }

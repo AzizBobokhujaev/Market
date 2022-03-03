@@ -6,6 +6,7 @@ using Contracts.Services;
 using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.Categories;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Service
 {
@@ -18,10 +19,23 @@ namespace Service
             _repository = repository;
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategories()
+        public async Task<GenericResponse<IEnumerable<Category>>> GetAllCategories()
         {
-            return await _repository.GetAllCategoriesAsync();
-
+            return new()
+            {
+                Payload = await _repository.GetAllCategoriesAsync(),
+                Status = (int) HttpStatusCode.OK,
+                Message = "AllCategories"
+            };
+        }
+        public async Task<GenericResponse<IEnumerable<Category>>> GetAllWithSubs()
+        {
+            return new()
+            {
+                Payload = await _repository.GetAllWithSubs(),
+                Status = (int) HttpStatusCode.OK,
+                Message = "AllCategoriesWithSubs"
+            };
         }
 
         public async Task<GenericResponse<Category>> GetCategoryById(int id)
@@ -84,5 +98,7 @@ namespace Service
             await _repository.SaveAsync();
             return new() {Status = (int) HttpStatusCode.OK, Message = $"Category by id : {id} successfully deleted"};
         }
+
+        
     }
 }

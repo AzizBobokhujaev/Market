@@ -8,7 +8,7 @@ namespace Contracts.Services
 {
     public interface ICategoryService
     {
-        Task<IEnumerable<Category>> GetAllCategories();
+        Task<GenericResponse<IEnumerable<Category>>> GetAllCategories();
 
         Task<GenericResponse<Category>> GetCategoryById(int id);
 
@@ -17,5 +17,6 @@ namespace Contracts.Services
 
         Task<Response> UpdateAsync(int id, UpdateCategoryRequest request);
         Task<Response> DeleteAsync(int id);
+        Task<GenericResponse<IEnumerable<Category>>> GetAllWithSubs();
     }
 }

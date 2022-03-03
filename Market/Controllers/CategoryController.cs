@@ -29,6 +29,12 @@ namespace Market.Controllers
             return Ok(await _service.GetAllCategories());
         }
 
+        [HttpGet("GetAllWithSubs")]
+        public async Task<IActionResult> GetAllWithSubs()
+        {
+            return Ok(await _service.GetAllWithSubs());
+        }
+
         [HttpGet("GetById")]
         public async Task<IActionResult> GetCategoryById(int id)
         {
