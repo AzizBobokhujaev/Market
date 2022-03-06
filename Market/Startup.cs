@@ -36,7 +36,7 @@ namespace Market
         {
             services.ConfigureDataContext(Configuration);
             services.ConfigureServices();   
-            services.ConfigureIdentity();   
+            services.ConfigureIdentity(); ////  
             services.ConfigureCors();
             services.ConfigureAuthentication(Configuration);////
             services.ConfigureLoggerService();////

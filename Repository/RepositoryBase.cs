@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Contracts.Repositories;
 using Entities;
 
@@ -12,6 +15,10 @@ namespace Repository
         {
             Context = context;
         }
+
+        public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression) =>
+            Context.Set<T>().Where(expression);
+
         public async Task CreateAsync(T entity) => await Context.Set<T>().AddAsync(entity);
        
         public void Delete(T entity) => Context.Set<T>().Remove(entity);

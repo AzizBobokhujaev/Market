@@ -15,9 +15,9 @@ namespace Entities
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<ProductImage> ProductFiles { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        
+        public DbSet<ProductImage> ProductImage { get; set; }
+        public DbSet<ProductSize> ProductSizes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -25,6 +25,7 @@ namespace Entities
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new UserRoleConfigurations());
+            builder.ApplyConfiguration(new CategoryConfiguration());
         }
     }
 }

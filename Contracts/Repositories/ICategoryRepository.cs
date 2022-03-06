@@ -8,8 +8,9 @@ namespace Contracts.Repositories
     {
         Task<IEnumerable<Category>> GetAllCategoriesAsync();
 
-        Task<Category> GetCategoriesById(int id);
+        Task<Category> GetCategoryById(int id);
 
         Task SaveAsync();
+        Task<IEnumerable<Category>> GetAllWithSubs();
     }
 }

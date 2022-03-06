@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Npgsql.Replication;
 using Repository;
 using Service;
 
@@ -23,32 +24,48 @@ namespace Market.Extensions
     {
         public static void ConfigureCors(this IServiceCollection services) =>
             services.AddCors(options => options.AddPolicy("Policy", builder =>
-                builder.WithOrigins("https://localhost:3000")
-                    .AllowCredentials()
+                builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod())); 
-        public static void ConfigureDataContext(this IServiceCollection services, IConfiguration configuration) =>
-            services.AddDbContext<DataContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Default"))); //.UseLazyLoadingProxies()
+        public static void ConfigureDataContext(this IServiceCollection services, IConfiguration configuration) => 
+        //services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultSqlServer"))); //.UseLazyLoadingProxies()
+        services.AddDbContext<DataContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultPostgres"))); //.UseLazyLoadingProxies()
 
    
     
         public static void ConfigureServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IFileService, FileService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductImageRepository, ProductImageRepository>();
+            services.AddScoped<IProductImageService, ProductImageService>();
+            services.AddScoped<IProductSizeRepository, ProductSizeRepository>();
+            services.AddScoped<IProductSizeService, ProductSizeService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ILoggerManager,LoggerManager>();
         }
 
-        //
+        /// <summary>
+        /// Configure Identity service 
+        /// </summary>
+        /// <param name="services"></param>
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             services.AddIdentity<User, IdentityRole<int>>().AddEntityFrameworkStores<DataContext>().AddDefaultTokenProviders();
             //services.AddIdentityCore<IdentityRole<int>>().AddEntityFrameworkStores<DataContext>();
+            services.Configure<IdentityOptions>(opt =>
+            {
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireLowercase = false;
+                opt.Password.RequireUppercase = false;
+                opt.Password.RequireNonAlphanumeric = false;
+                opt.Password.RequiredLength = 6;
+                opt.User.RequireUniqueEmail = true;
+
+            });
         }
     
          public static void ConfigureRouting(this IServiceCollection services) =>
@@ -78,6 +95,8 @@ namespace Market.Extensions
                  };
              });
          }
+
          
+
     }
 }
