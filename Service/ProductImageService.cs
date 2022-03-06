@@ -35,16 +35,17 @@ namespace Service
                 return new Response {Status = (int) HttpStatusCode.BadRequest, Message = "Failed"};
             foreach (var file in model.Images)
             {
-                var path = Path.GetFullPath($"wwwroot/Images/Product/{category.Name}/{model.ProductId}/{model.Color}");
-                if (!Directory.Exists(path))
+                var path = $"wwwroot/Images/Product/{category.Name}/{model.ProductId}/{model.Color}";
+                var fullPath = Path.GetFullPath(path);
+                if (!Directory.Exists(fullPath))
                 {
-                    Directory.CreateDirectory(path);    
+                    Directory.CreateDirectory(fullPath);    
                 }
 
                 var fileExtension = Path.GetExtension(file.FileName);
                 var fileName = $"{Guid.NewGuid().ToString()}.{fileExtension}";
-                var finalFileName = Path.Combine(path, fileName);
-
+                var finalFileName = Path.Combine(fullPath, fileName);
+                var imagePath = Path.Combine(path, fileName);
                 await using (var fileStream = System.IO.File.Create(finalFileName))
                 {
                     await file.CopyToAsync(fileStream);
@@ -52,7 +53,7 @@ namespace Service
                 files.Add(new ProductImage
                 {
                     Color = model.Color,
-                    ImagePath = finalFileName,
+                    ImagePath = imagePath,
                     ProductId = model.ProductId,
                 });
             }

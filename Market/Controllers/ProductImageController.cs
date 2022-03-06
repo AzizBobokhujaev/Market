@@ -20,14 +20,14 @@ namespace Market.Controllers
             _service = service;
         }
 
-        [HttpPost]
+        [HttpPost("AddImageForProduct")]
         public async Task<IActionResult> AddProductImage([FromForm] ProductImageDto model)
         {
             return Ok(await _service.AddImageForProduct(model));
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetProductImagesBuProductId(int productId)
+        [HttpGet("GetProductImagesByProductId")]
+        public async Task<IActionResult> GetProductImagesByProductId(int productId)
         {
             return Ok(await _service.GetProductImageByProductId(productId));
         }

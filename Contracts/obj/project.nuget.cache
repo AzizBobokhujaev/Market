@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "LFDejOA33n+DjXQ5L4tWj+aBWOBivBnGQS/V++Qn4TzmxIntWiXY0WfcT75Sj6agfIWrnUBaTIulF02zmT26jA==",
+  "dgSpecHash": "to4RVzYdABTmEQ6MhnOoyyA+qo2YacpMecUN+m7cluB+8dYYg1Tm4daA2lNwc4IMTpvTOcAKblgEsfoLJyXABg==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\Desktop\\market\\Contracts\\Contracts.csproj",
   "expectedPackageFiles": [
@@ -39,6 +39,8 @@
     "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\nlog\\5.0.0-rc2\\nlog.5.0.0-rc2.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\nlog.extensions.logging\\5.0.0-rc2\\nlog.extensions.logging.5.0.0-rc2.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\npgsql\\5.0.10\\npgsql.5.0.10.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\5.0.10\\npgsql.entityframeworkcore.postgresql.5.0.10.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.collections.concurrent\\4.3.0\\system.collections.concurrent.4.3.0.nupkg.sha512",
@@ -79,6 +81,7 @@
     "C:\\Users\\admin\\.nuget\\packages\\system.resources.resourcemanager\\4.3.0\\system.resources.resourcemanager.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.runtime.caching\\4.7.0\\system.runtime.caching.4.7.0.nupkg.sha512",
+    "C:\\Users\\admin\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.6.0\\system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.runtime.extensions\\4.3.0\\system.runtime.extensions.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.runtime.handles\\4.3.0\\system.runtime.handles.4.3.0.nupkg.sha512",
     "C:\\Users\\admin\\.nuget\\packages\\system.runtime.interopservices\\4.3.0\\system.runtime.interopservices.4.3.0.nupkg.sha512",

@@ -27,8 +27,9 @@ namespace Market.Extensions
                 builder.AllowAnyOrigin()
                     .AllowAnyHeader()
                     .AllowAnyMethod())); 
-        public static void ConfigureDataContext(this IServiceCollection services, IConfiguration configuration) =>
-            services.AddDbContext<DataContext>(builder => builder.UseSqlServer(configuration.GetConnectionString("Default"))); //.UseLazyLoadingProxies()
+        public static void ConfigureDataContext(this IServiceCollection services, IConfiguration configuration) => 
+        //services.AddDbContext<DataContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultSqlServer"))); //.UseLazyLoadingProxies()
+        services.AddDbContext<DataContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultPostgres"))); //.UseLazyLoadingProxies()
 
    
     
@@ -39,6 +40,8 @@ namespace Market.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductImageRepository, ProductImageRepository>();
             services.AddScoped<IProductImageService, ProductImageService>();
+            services.AddScoped<IProductSizeRepository, ProductSizeRepository>();
+            services.AddScoped<IProductSizeService, ProductSizeService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();

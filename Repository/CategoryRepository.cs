@@ -32,12 +32,12 @@ namespace Repository
 
         public async Task<IEnumerable<Category>> GetAllWithSubs()
         {
-            return  await _context.Categories.Select(c => new Category
+            var  topCategory =await _context.Categories.Select(c => new Category
             {
                 Id = c.Id,
                 Name = c.Name,
                 ParentId = c.ParentId,
-                SubCategory = _context.Categories.Select(category => new Category
+                SubCategory =  _context.Categories.Select(category => new Category
                 {
                     Id = category.Id,
                     Name = category.Name,
@@ -46,10 +46,17 @@ namespace Repository
                     {
                         Id = subcategory.Id,
                         Name = subcategory.Name,
-                        ParentId = subcategory.ParentId
-                    }).Where(ct=>ct.ParentId==category.Id).ToList()
+                        ParentId = subcategory.ParentId,
+                        SubCategory = _context.Categories.Select(subcateg=>new Category
+                        {
+                            Id = subcateg.Id,
+                            Name = subcateg.Name,
+                            ParentId = subcateg.ParentId,
+                        }).Where(cat=>cat.ParentId==subcategory.Id).ToList()
+                    }).Where(cat=>cat.ParentId==category.Id).ToList()
                 }).Where(cat=>cat.ParentId == c.Id).ToList()
             }).Where(cat => cat.ParentId == 0).ToListAsync();
+            return topCategory;
         }
     }
 }

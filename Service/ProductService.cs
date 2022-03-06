@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Contracts.Repositories;
 using Contracts.Services;
@@ -10,9 +8,6 @@ using Entities.DataTransferObjects;
 using Entities.DataTransferObjects.Products;
 using Entities.Enums;
 using Entities.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace Service
 {
@@ -20,10 +15,12 @@ namespace Service
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
-        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository)
+        private readonly IProductSizeService _productSizeService;
+        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IProductSizeService productSizeService)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
+            _productSizeService = productSizeService;
         }
 
         
@@ -64,27 +61,28 @@ namespace Service
             var category = await _categoryRepository.GetCategoryById(categoryId);
             if (category==null)
                 return 0; 
-
+            
             var product = new Product
             {
                 Name = model.Name,
                 Price = model.Price,
                 Description = model.Description,
-                Size = model.Size,
-                Seasons = model.Seasons,
+                Seasons = Seasons.Autumn,
                 Material = model.Material,
                 Width = model.Width,
                 Length = model.Length,
                 IsNew = true,
                 IsSale = false,
-                UserId = int.Parse(currentUserId),
+                UserId = 1,
                 CategoryId = categoryId,
-                CreatedAt = DateTime.Now
-                
+                CreatedAt = DateTime.Now,
             };
-            
+
+
             await _productRepository.CreateAsync(product);
             await _productRepository.SaveAsync();
+            await _productSizeService.CreateProductSize(model.ProductSize, product.Id);
+            var productId = product.Id;
             return product.Id;
         }
 
@@ -97,7 +95,6 @@ namespace Service
             product.Name = model.Name;
             product.Price = model.Price;
             product.Description = model.Description;
-            product.Size = model.Size;
             product.Seasons = model.Seasons;
             product.Material = model.Material;
             product.Width = model.Width;

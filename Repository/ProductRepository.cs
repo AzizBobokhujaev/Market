@@ -25,7 +25,6 @@ namespace Repository
                 Name = p.Name,
                 Price = p.Price,
                 Description = p.Description,
-                Size = p.Size,
                 Material = p.Material,
                 Width = p.Width,
                 Length = p.Length,
@@ -43,7 +42,13 @@ namespace Repository
                     Color = pi.Color,
                     ImagePath = pi.ImagePath,
                     ProductId = pi.ProductId
-                }).Where(pi=>pi.ProductId == id).ToList()
+                }).Where(pi=>pi.ProductId == id).ToList(),
+                ProductSizes = _context.ProductSizes.Select(ps=>new ProductSize
+                {
+                    Id = ps.Id,
+                    ProductId = ps.ProductId,
+                    Size = ps.Size
+                }).Where(psize=>psize.ProductId==p.Id).ToList()
             }).Where(prod=>prod.Id==id).FirstOrDefaultAsync();
         }
 
@@ -56,7 +61,6 @@ namespace Repository
                 Price = p.Price,
                 Seasons = p.Seasons,
                 Description = p.Description,
-                Size = p.Size,
                 Material = p.Material,
                 Length = p.Length,
                 Width = p.Width,
@@ -68,6 +72,7 @@ namespace Repository
                 CategoryId = p.CategoryId,
                 UserId = p.UserId,
                 ProductImages = _context.ProductImage.Where(pi => pi.ProductId == p.Id).ToList(),
+                ProductSizes = _context.ProductSizes.Where(ps=>ps.ProductId==p.Id).ToList(),
                 Category = _context.Categories.Select(c=>new Category
                 {
                     Id =c.Id,

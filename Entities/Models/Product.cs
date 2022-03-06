@@ -12,10 +12,10 @@ namespace Entities.Models
     {
         [Key]
         public int Id { get; set; }// номер продукта
-        public string Name { get; set; } // название продкута
+        [Column(TypeName = "jsonb")]
+        public Dictionary<string,string> Name { get; set; } // название продкута
         public decimal Price { get; set; } // цена продукта
         public string Description { get; set; }
-        public string Size { get; set; } // размеры продукта
         public Seasons Seasons { get; set; } 
         public string Material { get; set; } 
         public int? Width { get; set; } // ширина
@@ -33,7 +33,7 @@ namespace Entities.Models
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
-        
+        public virtual IEnumerable<ProductSize> ProductSizes { get; set; }
         public virtual IEnumerable<ProductImage> ProductImages { get; set; }
 
 

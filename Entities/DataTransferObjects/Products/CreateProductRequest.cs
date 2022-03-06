@@ -8,13 +8,13 @@ namespace Entities.DataTransferObjects.Products
 {
     public class CreateProductRequest
     {
-        public string Name { get; set; }
+        public Dictionary<string, string> Name { get; set; }
         public decimal Price { get; set; }
         public string Description { get; set; }
-        public string Size { get; set; }
         public string Material { get; set; }
         public int? Width { get; set; }
         public int? Length { get; set; }
         public Seasons Seasons { get; set; }
+        public int[] ProductSize { get; set; }
     }
 }
