@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using Contracts.Services;
 using Entities.DataTransferObjects.ProductImage;
@@ -30,6 +31,20 @@ namespace Market.Controllers
         public async Task<IActionResult> GetProductImagesByProductId(int productId)
         {
             return Ok(await _service.GetProductImageByProductId(productId));
+        }
+
+        [HttpDelete("DeleteImagesByProductId")]
+        public async Task<IActionResult> DeleteImagesByProductId(int productId)
+        {
+            var productImg =await _service.DeleteImageByProductId(productId);
+            return productImg.Status == 200 ? Ok(productImg) : NotFound(productImg);
+        }
+
+        [HttpDelete("DeleteProductImageById")]
+        public async Task<IActionResult> DeleteProductImageById(int id)
+        {
+            var productImg =await _service.DeleteImageById(id);
+            return productImg.Status == 200 ? Ok(productImg) : NotFound(productImg);
         }
     }
 }

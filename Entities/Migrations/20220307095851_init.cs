@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Entities.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -56,7 +57,7 @@ namespace Entities.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ParentId = table.Column<int>(type: "integer", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
+                    Name = table.Column<string>(type: "jsonb", nullable: true),
                     CategoryId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -182,7 +183,7 @@ namespace Entities.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "jsonb", nullable: true),
+                    Name = table.Column<Dictionary<string, string>>(type: "jsonb", nullable: true),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Seasons = table.Column<int>(type: "integer", nullable: false),
@@ -260,36 +261,14 @@ namespace Entities.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 2, "b370ea26-499a-4637-95bf-4814e09c1219", "Контентщик", "КОНТЕНТЩИК" },
-                    { 1, "f577c3a9-269c-4c72-b088-8bf0c751a3a8", "Администратор", "АДМИНИСТРАТОР" }
+                    { 1, "4c4eb137-5fad-48a7-9f31-1e922ab0a7c6", "Администратор", "АДМИНИСТРАТОР" },
+                    { 2, "6ab505bc-a8b8-4fa8-ba47-17a502dea2f8", "Контентщик", "КОНТЕНТЩИК" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "1c8728ed-3953-4404-9250-39e6c5c88b91", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEAcBasM+5fOC78LxvmUQv9gfU6hDdfdD80dLT+aeE3oBRIr8/Ts1R+JhyKoLcjFs0A==", null, false, "", false, "Admin" });
-
-            migrationBuilder.InsertData(
-                table: "Categories",
-                columns: new[] { "Id", "CategoryId", "Name", "ParentId" },
-                values: new object[,]
-                {
-                    { 15, null, "Военный", 4 },
-                    { 14, null, "Берцы", 6 },
-                    { 13, null, "Мокасины", 5 },
-                    { 12, null, "Спортивный", 5 },
-                    { 11, null, "Сапоги", 5 },
-                    { 10, null, "Рабочий", 5 },
-                    { 9, null, "Охотничий", 5 },
-                    { 7, null, "Подростковый", 1 },
-                    { 6, null, "Военный", 1 },
-                    { 5, null, "Мужской", 1 },
-                    { 4, null, "Ремни", 0 },
-                    { 3, null, "Подошвы", 0 },
-                    { 2, null, "Кожа", 0 },
-                    { 8, null, "Классик", 5 },
-                    { 1, null, "Обувь", 0 }
-                });
+                values: new object[] { 1, 0, "d32d8644-ce03-47b8-9f03-cf942e862953", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEByO4W+btCCSAvLcUxU4sikIi7LXbSqi0OrCH2DlB12uLsmicovMQrkThUagmqZ+tA==", null, false, "", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

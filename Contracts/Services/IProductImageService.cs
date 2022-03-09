@@ -10,5 +10,8 @@ namespace Contracts.Services
     {
         Task<Response> AddImageForProduct(ProductImageDto model);
         Task<GenericResponse<IEnumerable<ProductImage>>> GetProductImageByProductId(int productId);
+
+        Task<Response> DeleteImageByProductId(int productId);
+        Task<Response> DeleteImageById(int id);
     }
 }

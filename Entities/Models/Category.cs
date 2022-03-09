@@ -7,7 +7,8 @@ namespace Entities.Models
     {
         public int Id { get; set; }
         public int? ParentId { get; set; }
-        public string Name { get; set; }
+        [Column(TypeName = "jsonb")]
+        public Dictionary<string,string> Name { get; set; }
         
         public virtual ICollection<Category> SubCategory { get; set; }
         

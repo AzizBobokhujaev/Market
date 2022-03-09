@@ -35,7 +35,7 @@ namespace Service
                 return new Response {Status = (int) HttpStatusCode.BadRequest, Message = "Failed"};
             foreach (var file in model.Images)
             {
-                var path = $"wwwroot/Images/Product/{category.Name}/{model.ProductId}/{model.Color}";
+                var path = $"wwwroot/Images/Product/{model.ProductId}/{model.Color}";
                 var fullPath = Path.GetFullPath(path);
                 if (!Directory.Exists(fullPath))
                 {
@@ -81,6 +81,34 @@ namespace Service
                 Status = (int) HttpStatusCode.OK,
                 Message = "Ok"
             };
+        }
+
+        public async Task<Response> DeleteImageByProductId(int productId)
+        {
+            var productImages = await _imageRepository.GetProdImgByProdId(productId);
+            if (!productImages.Any())
+                return new Response
+                    {Status = (int) HttpStatusCode.NotFound, Message = "Images by this productId not found"};
+            foreach (var productImage in productImages)
+            {
+                var imgPath = Path.Combine(Directory.GetCurrentDirectory(), $"{productImage.ImagePath}");
+                if (System.IO.File.Exists(productImage.ImagePath))
+                    System.IO.File.Delete(productImage.ImagePath);
+                _imageRepository.Delete(productImage);
+            }
+            await _imageRepository.SaveAsync();
+            return new Response
+                {Status = (int) HttpStatusCode.OK, Message = "Images by this productId deleted successfully"};
+        }
+
+        public async Task<Response> DeleteImageById(int id)
+        {
+            var prodImg = await _imageRepository.GetProductImageById(id);
+            if (prodImg == null)
+                return new Response {Status = (int) HttpStatusCode.NotFound, Message = "Image by this id not found"};
+            _imageRepository.Delete(prodImg);
+            await _imageRepository.SaveAsync();
+            return new Response { Status = (int)HttpStatusCode.OK,Message = "Image by this Id successfully deleted"};
         }
     }
 }

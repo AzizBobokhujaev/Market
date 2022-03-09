@@ -25,7 +25,7 @@ namespace Entities
             builder.ApplyConfiguration(new RoleConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
             builder.ApplyConfiguration(new UserRoleConfigurations());
-            builder.ApplyConfiguration(new CategoryConfiguration());
+            //builder.ApplyConfiguration(new CategoryConfiguration());
         }
     }
 }

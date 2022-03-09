@@ -36,6 +36,12 @@ namespace Repository
                 IsNew = p.IsNew,
                 IsSale = p.IsSale,
                 Seasons = p.Seasons,
+                Category = _context.Categories.Select(category=>new Category
+                {
+                    Id = category.Id,
+                    Name = category.Name,
+                    ParentId = category.ParentId,
+                }).FirstOrDefault(x => x.Id==p.CategoryId),
                 ProductImages =_context.ProductImage.Select(pi => new ProductImage
                 {
                     Id = pi.Id,

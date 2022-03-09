@@ -13,12 +13,6 @@ namespace Repository
         public ProductImageRepository(DataContext context) : base(context)
         {
         }
-
-        public async Task<List<ProductImage>> GetAll()
-        {
-            return await Context.ProductImage.ToListAsync();
-        }
-
         public async Task CreateFile(List<ProductImage> files)
         {
             await Context.AddRangeAsync(files);
@@ -28,6 +22,16 @@ namespace Repository
         public async Task<IEnumerable<ProductImage>> GetProdImgByProdId(int productId)
         {
             return await Context.ProductImage.Where(pi => pi.ProductId == productId).ToListAsync();
+        }
+
+        public async Task SaveAsync()
+        {
+            await Context.SaveChangesAsync();
+        }
+
+        public async Task<ProductImage> GetProductImageById(int id)
+        {
+            return await Context.ProductImage.FirstOrDefaultAsync(pi => pi.Id == id);
         }
     }
 }
