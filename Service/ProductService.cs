@@ -15,12 +15,10 @@ namespace Service
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly IProductRepository _productRepository;
-        private readonly IProductSizeService _productSizeService;
-        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository, IProductSizeService productSizeService)
+        public ProductService(IProductRepository productRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
-            _productSizeService = productSizeService;
         }
 
         
@@ -66,22 +64,21 @@ namespace Service
             {
                 Name = model.Name,
                 Price = model.Price,
-                Description = model.Description,
-                Seasons = Seasons.Autumn,
+                Seasons = model.Seasons,
                 Material = model.Material,
                 Width = model.Width,
                 Length = model.Length,
-                IsNew = true,
+                IsNew = model.IsNew,
                 IsSale = false,
                 UserId = 1,
                 CategoryId = categoryId,
                 CreatedAt = DateTime.Now,
+                Size = model.Size
             };
 
 
             await _productRepository.CreateAsync(product);
             await _productRepository.SaveAsync();
-            await _productSizeService.CreateProductSize(model.ProductSize, product.Id);
             var productId = product.Id;
             return product.Id;
         }
@@ -94,13 +91,13 @@ namespace Service
                     {Status = (int) HttpStatusCode.NotFound, Message = $"Product by id: {productId} not found"};
             product.Name = model.Name;
             product.Price = model.Price;
-            product.Description = model.Description;
             product.Seasons = model.Seasons;
             product.Material = model.Material;
             product.Width = model.Width;
             product.Length = model.Length;
             product.IsNew = false;
             product.IsSale = model.IsSale;
+            product.Size = model.Size;
             product.UpdatedAt = DateTime.Now;
 
             _productRepository.Update(product);

@@ -5,7 +5,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Entities.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -51,13 +51,27 @@ namespace Entities.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Banners",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ImagePath = table.Column<string>(type: "text", nullable: true),
+                    Queue = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Banners", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     ParentId = table.Column<int>(type: "integer", nullable: true),
-                    Name = table.Column<string>(type: "jsonb", nullable: true),
+                    Name = table.Column<Dictionary<string, string>>(type: "jsonb", nullable: true),
                     CategoryId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -185,9 +199,8 @@ namespace Entities.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<Dictionary<string, string>>(type: "jsonb", nullable: true),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
-                    Description = table.Column<string>(type: "text", nullable: true),
                     Seasons = table.Column<int>(type: "integer", nullable: false),
-                    Material = table.Column<string>(type: "text", nullable: true),
+                    Material = table.Column<Dictionary<string, string>>(type: "jsonb", nullable: true),
                     Width = table.Column<int>(type: "integer", nullable: true),
                     Length = table.Column<int>(type: "integer", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -196,7 +209,8 @@ namespace Entities.Migrations
                     IsNew = table.Column<bool>(type: "boolean", nullable: false),
                     IsSale = table.Column<bool>(type: "boolean", nullable: false),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: false)
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    Size = table.Column<int[]>(type: "integer[]", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -236,39 +250,19 @@ namespace Entities.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "ProductSizes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ProductId = table.Column<int>(type: "integer", nullable: false),
-                    Size = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductSizes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ProductSizes_Products_ProductId",
-                        column: x => x.ProductId,
-                        principalTable: "Products",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "4c4eb137-5fad-48a7-9f31-1e922ab0a7c6", "Администратор", "АДМИНИСТРАТОР" },
-                    { 2, "6ab505bc-a8b8-4fa8-ba47-17a502dea2f8", "Контентщик", "КОНТЕНТЩИК" }
+                    { 1, "20d5a5ba-618f-46e3-b0ac-24844337b399", "Администратор", "АДМИНИСТРАТОР" },
+                    { 2, "01de35cb-aad4-4197-a301-e21b2d0ef148", "Контентщик", "КОНТЕНТЩИК" }
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { 1, 0, "d32d8644-ce03-47b8-9f03-cf942e862953", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEByO4W+btCCSAvLcUxU4sikIi7LXbSqi0OrCH2DlB12uLsmicovMQrkThUagmqZ+tA==", null, false, "", false, "Admin" });
+                values: new object[] { 1, 0, "e174fb19-8df6-47eb-843d-80e63d9b5a1f", "Admin@mail.ru", false, false, null, "ADMIN@MAIL.RU", "ADMIN", "AQAAAAEAACcQAAAAEIbmKz8YUNB9umPprOQHVQiPyzaLw1HMHGmRqi1Yg3PtHeUquegYzQ5nfB+Rrn+09g==", null, false, "", false, "Admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",
@@ -337,11 +331,6 @@ namespace Entities.Migrations
                 name: "IX_Products_UserId",
                 table: "Products",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductSizes_ProductId",
-                table: "ProductSizes",
-                column: "ProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -362,10 +351,10 @@ namespace Entities.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ProductImage");
+                name: "Banners");
 
             migrationBuilder.DropTable(
-                name: "ProductSizes");
+                name: "ProductImage");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

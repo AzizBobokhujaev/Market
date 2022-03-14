@@ -40,8 +40,8 @@ namespace Market.Extensions
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductImageRepository, ProductImageRepository>();
             services.AddScoped<IProductImageService, ProductImageService>();
-            services.AddScoped<IProductSizeRepository, ProductSizeRepository>();
-            services.AddScoped<IProductSizeService, ProductSizeService>();
+            services.AddScoped<IBannerRepository, BannerRepository>();
+            services.AddScoped<IBannerService, BannerService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ICategoryRepository, CategoryRepository>();

@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Entities.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20220307095851_init")]
-    partial class init
+    [Migration("20220314045609_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,24 @@ namespace Entities.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.14")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+            modelBuilder.Entity("Entities.Models.Banner", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("ImagePath")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Queue")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Banners");
+                });
 
             modelBuilder.Entity("Entities.Models.Category", b =>
                 {
@@ -32,7 +50,7 @@ namespace Entities.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Name")
+                    b.Property<Dictionary<string, string>>("Name")
                         .HasColumnType("jsonb");
 
                     b.Property<int?>("ParentId")
@@ -61,9 +79,6 @@ namespace Entities.Migrations
                     b.Property<DateTime>("DeletedAt")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<string>("Description")
-                        .HasColumnType("text");
-
                     b.Property<bool>("IsNew")
                         .HasColumnType("boolean");
 
@@ -73,8 +88,8 @@ namespace Entities.Migrations
                     b.Property<int?>("Length")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Material")
-                        .HasColumnType("text");
+                    b.Property<Dictionary<string, string>>("Material")
+                        .HasColumnType("jsonb");
 
                     b.Property<Dictionary<string, string>>("Name")
                         .HasColumnType("jsonb");
@@ -84,6 +99,9 @@ namespace Entities.Migrations
 
                     b.Property<int>("Seasons")
                         .HasColumnType("integer");
+
+                    b.Property<int[]>("Size")
+                        .HasColumnType("integer[]");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");
@@ -124,26 +142,6 @@ namespace Entities.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("ProductImage");
-                });
-
-            modelBuilder.Entity("Entities.Models.ProductSize", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Size")
-                        .HasColumnType("integer");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ProductSizes");
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>
@@ -219,13 +217,13 @@ namespace Entities.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d32d8644-ce03-47b8-9f03-cf942e862953",
+                            ConcurrencyStamp = "e174fb19-8df6-47eb-843d-80e63d9b5a1f",
                             Email = "Admin@mail.ru",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MAIL.RU",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEByO4W+btCCSAvLcUxU4sikIi7LXbSqi0OrCH2DlB12uLsmicovMQrkThUagmqZ+tA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIbmKz8YUNB9umPprOQHVQiPyzaLw1HMHGmRqi1Yg3PtHeUquegYzQ5nfB+Rrn+09g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -264,14 +262,14 @@ namespace Entities.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "4c4eb137-5fad-48a7-9f31-1e922ab0a7c6",
+                            ConcurrencyStamp = "20d5a5ba-618f-46e3-b0ac-24844337b399",
                             Name = "Администратор",
                             NormalizedName = "АДМИНИСТРАТОР"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "6ab505bc-a8b8-4fa8-ba47-17a502dea2f8",
+                            ConcurrencyStamp = "01de35cb-aad4-4197-a301-e21b2d0ef148",
                             Name = "Контентщик",
                             NormalizedName = "КОНТЕНТЩИК"
                         });
@@ -422,15 +420,6 @@ namespace Entities.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Entities.Models.ProductSize", b =>
-                {
-                    b.HasOne("Entities.Models.Product", null)
-                        .WithMany("ProductSizes")
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
@@ -492,8 +481,6 @@ namespace Entities.Migrations
             modelBuilder.Entity("Entities.Models.Product", b =>
                 {
                     b.Navigation("ProductImages");
-
-                    b.Navigation("ProductSizes");
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>

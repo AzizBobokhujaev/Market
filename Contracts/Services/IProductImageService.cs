@@ -13,5 +13,6 @@ namespace Contracts.Services
 
         Task<Response> DeleteImageByProductId(int productId);
         Task<Response> DeleteImageById(int id);
+        Task<Response> UpdateProductImageByProductId(ProductImageDto model);
     }
 }

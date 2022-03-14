@@ -7,6 +7,7 @@ using Contracts.Services;
 using Entities.DataTransferObjects.ProductImage;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Market.Controllers
 {
@@ -21,18 +22,24 @@ namespace Market.Controllers
             _service = service;
         }
 
+        [HttpGet("GetProductImagesByProductId")]
+        public async Task<IActionResult> GetProductImagesByProductId(int productId)
+        {
+            return Ok(await _service.GetProductImageByProductId(productId));
+        }
+        
         [HttpPost("AddImageForProduct")]
         public async Task<IActionResult> AddProductImage([FromForm] ProductImageDto model)
         {
             return Ok(await _service.AddImageForProduct(model));
         }
 
-        [HttpGet("GetProductImagesByProductId")]
-        public async Task<IActionResult> GetProductImagesByProductId(int productId)
+        [HttpPut("UpdateProductImageByProductId")]
+        public async Task<IActionResult> UpdateProductImageByProductId([FromForm] ProductImageDto model)
         {
-            return Ok(await _service.GetProductImageByProductId(productId));
+            var productImg =await _service.UpdateProductImageByProductId(model);
+            return productImg.Status == 200 ? Ok(productImg) : NotFound(productImg);
         }
-
         [HttpDelete("DeleteImagesByProductId")]
         public async Task<IActionResult> DeleteImagesByProductId(int productId)
         {

@@ -110,5 +110,18 @@ namespace Service
             await _imageRepository.SaveAsync();
             return new Response { Status = (int)HttpStatusCode.OK,Message = "Image by this Id successfully deleted"};
         }
+
+        public async Task<Response> UpdateProductImageByProductId(ProductImageDto model)
+        {
+            var productImages = await _imageRepository.GetProdImgByProdId(model.ProductId);
+            foreach (var productImage in productImages)
+            {
+                var path = Path.Combine(Directory.GetCurrentDirectory(), $"{productImage.ImagePath}");
+                if (Directory.Exists(path))
+                    Directory.Delete(path);
+            }
+
+            return new Response {Status = (int) HttpStatusCode.OK, Message = "ProductImage updated successfully"};
+        }
     }
 }

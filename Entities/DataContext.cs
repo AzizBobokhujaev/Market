@@ -1,4 +1,5 @@
 ﻿using Entities.Configuration;
+using Entities.DataTransferObjects.Banner;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -16,7 +17,7 @@ namespace Entities
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductImage> ProductImage { get; set; }
-        public DbSet<ProductSize> ProductSizes { get; set; }
+        public DbSet<Banner> Banners { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

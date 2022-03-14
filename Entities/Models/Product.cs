@@ -15,9 +15,9 @@ namespace Entities.Models
         [Column(TypeName = "jsonb")]
         public Dictionary<string,string> Name { get; set; } // название продкута
         public decimal Price { get; set; } // цена продукта
-        public string Description { get; set; }
         public Seasons Seasons { get; set; } 
-        public string Material { get; set; } 
+        [Column(TypeName = "jsonb")]
+        public Dictionary<string,string> Material { get; set; } 
         public int? Width { get; set; } // ширина
         public int? Length { get; set; } //длина 
         public DateTime CreatedAt { get; set; }
@@ -33,7 +33,7 @@ namespace Entities.Models
 
         [ForeignKey("UserId")]
         public virtual User User { get; set; }
-        public virtual IEnumerable<ProductSize> ProductSizes { get; set; }
+        public virtual int[] Size { get; set; }
         public virtual IEnumerable<ProductImage> ProductImages { get; set; }
 
 

@@ -24,7 +24,6 @@
 
     <ItemGroup>
       <Folder Include="Middlewares" />
-      <Folder Include="wwwroot\Images\Product" />
     </ItemGroup>
 
     <ItemGroup>
@@ -40,6 +39,10 @@
       <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\White\43bc1dda-e0e0-43f9-ab82-051eca4be4d5..jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\White\4d8fa81d-5aed-4383-9605-2e76296dd520..jpg" />
       <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\White\e5679a85-c59c-4ba6-9420-e3142253cee7..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\1\Black\2004d70e-c747-48ae-8cab-3a5c82f35da5..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\1\Black\7db4489a-9153-4bb3-85d2-7fe762566b72..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\1\Black\b51a3f98-6fc4-4515-b7d1-5181eb86d7d8..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\1\Black\dfcbdd88-e363-46b9-a355-aed4208365a8..jpg" />
     </ItemGroup>
 
 </Project>

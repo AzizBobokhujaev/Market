@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Contracts.Repositories;
 using Entities;
+using Entities.DataTransferObjects.Products;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,12 +20,12 @@ namespace Repository
         
         public async Task<Product> GetProductById(int id)
         {
+            
             return await _context.Products.Select(p=>new Product
             {
                 Id = p.Id,
                 Name = p.Name,
                 Price = p.Price,
-                Description = p.Description,
                 Material = p.Material,
                 Width = p.Width,
                 Length = p.Length,
@@ -32,29 +33,12 @@ namespace Repository
                 UserId = p.UserId,
                 CreatedAt = p.CreatedAt,
                 UpdatedAt = p.UpdatedAt,
-                DeletedAt = p.DeletedAt,
                 IsNew = p.IsNew,
                 IsSale = p.IsSale,
                 Seasons = p.Seasons,
-                Category = _context.Categories.Select(category=>new Category
-                {
-                    Id = category.Id,
-                    Name = category.Name,
-                    ParentId = category.ParentId,
-                }).FirstOrDefault(x => x.Id==p.CategoryId),
-                ProductImages =_context.ProductImage.Select(pi => new ProductImage
-                {
-                    Id = pi.Id,
-                    Color = pi.Color,
-                    ImagePath = pi.ImagePath,
-                    ProductId = pi.ProductId
-                }).Where(pi=>pi.ProductId == id).ToList(),
-                ProductSizes = _context.ProductSizes.Select(ps=>new ProductSize
-                {
-                    Id = ps.Id,
-                    ProductId = ps.ProductId,
-                    Size = ps.Size
-                }).Where(psize=>psize.ProductId==p.Id).ToList()
+                Size = p.Size,
+                Category = _context.Categories.FirstOrDefault(category => category.Id==p.CategoryId),
+                ProductImages =_context.ProductImage.Where(pi=>pi.ProductId == id).ToList()
             }).Where(prod=>prod.Id==id).FirstOrDefaultAsync();
         }
 
@@ -66,7 +50,6 @@ namespace Repository
                 Name = p.Name,
                 Price = p.Price,
                 Seasons = p.Seasons,
-                Description = p.Description,
                 Material = p.Material,
                 Length = p.Length,
                 Width = p.Width,
@@ -77,8 +60,8 @@ namespace Repository
                 IsSale = p.IsSale,
                 CategoryId = p.CategoryId,
                 UserId = p.UserId,
+                Size = p.Size,
                 ProductImages = _context.ProductImage.Where(pi => pi.ProductId == p.Id).ToList(),
-                ProductSizes = _context.ProductSizes.Where(ps=>ps.ProductId==p.Id).ToList(),
                 Category = _context.Categories.Select(c=>new Category
                 {
                     Id =c.Id,
