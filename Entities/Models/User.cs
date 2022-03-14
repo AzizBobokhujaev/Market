@@ -1,10 +1,11 @@
-﻿namespace Entities.Models
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
+namespace Entities.Models
 {
-    public class User
+    public class User:IdentityUser<int>
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
+        public IEnumerable<Product> Products { get; set; }
     }
 }

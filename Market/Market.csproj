@@ -5,16 +5,44 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.14" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.14" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.14" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.14" />
+        <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="5.0.10" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\LoggerService\LoggerService.csproj" />
       <ProjectReference Include="..\Service\Service.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <Folder Include="Middlewares" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Классик\2\Black\2ec063d3-2e88-49a8-be01-67fdf0e895b8..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Классик\2\Black\7ad1ad2b-6f39-4f8e-8891-3e3fa79a2050..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Классик\2\Brown\00f42895-c30a-4a3e-b123-9bd68477bc5f..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Классик\2\Brown\91758168-8677-41aa-a41e-1f3314af0d92..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Классик\2\Brown\b33e3813-02a6-4bd5-a8e8-ab2937d657dc..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Классик\2\Brown\bf8d28f6-d858-423c-a83b-c321b12e9a54..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\Black\395c9ff9-63a9-4177-8bc7-94cc13b88e3f..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\Black\d6616825-e6d0-4b65-8c22-b2381d1737f8..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\Black\f8be3217-0797-4ad0-ba92-1b6d39829b24..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\White\43bc1dda-e0e0-43f9-ab82-051eca4be4d5..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\White\4d8fa81d-5aed-4383-9605-2e76296dd520..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\Подростковый\4\White\e5679a85-c59c-4ba6-9420-e3142253cee7..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\1\Black\2004d70e-c747-48ae-8cab-3a5c82f35da5..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\1\Black\7db4489a-9153-4bb3-85d2-7fe762566b72..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\1\Black\b51a3f98-6fc4-4515-b7d1-5181eb86d7d8..jpg" />
+      <_ContentIncludedByDefault Remove="wwwroot\Images\Product\1\Black\dfcbdd88-e363-46b9-a355-aed4208365a8..jpg" />
     </ItemGroup>
 
 </Project>
